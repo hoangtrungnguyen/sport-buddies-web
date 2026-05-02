@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", sans-serif;
+
+  --color-primary: #006b2c;
+  --color-primary-container: #00873a;
+  --color-primary-light: #DCFCE7;
+  --color-on-primary: #ffffff;
+  
+  --color-secondary: #9d4300;
+  --color-secondary-container: #fd761a;
+  
+  --color-tertiary: #a72d51;
+  --color-tertiary-container: #c74668;
+  
+  --color-surface: #FFFFFF;
+  --color-background: #f4fcf0;
+  --color-on-surface: #171d16;
+  --color-on-surface-variant: #3e4a3d;
+  
+  --color-success: #22C55E;
+  --color-success-bg: #F0FDF4;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  
+  --color-warning: #F59E0B;
+  --color-warning-bg: #FFFBEB;
+
+  --color-neutral-50: #F8FAFC;
+  --color-neutral-100: #F1F5F9;
+  --color-neutral-200: #E2E8F0;
+  --color-neutral-300: #CBD5E1;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-900: #0F172A;
+
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+.font-display {
+  font-family: "Sora", sans-serif;
+}
+
+.font-sans {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
