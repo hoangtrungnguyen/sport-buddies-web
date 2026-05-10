@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, Star, MapPin, Search, Bolt, ShieldCheck, Users, Map as MapIcon, Sliders, Clock, BellRing } from 'lucide-react';
+import { ArrowRight, Star, MapPin, Search, Bolt, ShieldCheck, Users, Map as MapIcon, Sliders, Clock, BellRing, Timer } from 'lucide-react';
 
 const CUSTOMER_APP_URL: string = import.meta.env.VITE_CUSTOMER_APP_URL ?? '#';
 
@@ -326,6 +326,22 @@ export default function HomeSection() {
               </motion.div>
             ))}
           </div>
+
+          {/* Tagline — MKT-002.2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.45 }}
+            className="mt-14 flex flex-col items-center gap-3"
+          >
+            <div className="flex items-center gap-3 bg-primary-light border border-primary/15 px-6 py-3 rounded-full">
+              <Timer size={20} className="text-primary shrink-0" />
+              <p className="text-primary font-black text-base md:text-lg tracking-tight">
+                Dưới 60 giây từ mở app đến đặt xong
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
