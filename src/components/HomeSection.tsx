@@ -65,7 +65,7 @@ export default function HomeSection() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-4xl md:text-6xl font-black mb-8 max-w-4xl mx-auto leading-tight"
           >
-            Đặt sân Pickleball TPHCM – <span className="text-primary italic">SportBuddies</span>
+            Đặt sân thể thao tại Sài Gòn trong 30 giây
           </motion.h1>
           
           <motion.p 
