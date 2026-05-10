@@ -64,49 +64,22 @@ export default function OwnerSection() {
             </div>
           </div>
 
-          {/* Form Card */}
-          <motion.div 
+          {/* CTA Card */}
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="lg:col-span-5 bg-white rounded-3xl shadow-2xl p-8 border border-neutral-100"
           >
             <h3 className="text-2xl font-black mb-2">Bắt đầu ngay hôm nay</h3>
-            <p className="text-neutral-500 text-sm mb-8">Điền thông tin để nhận tư vấn miễn phí trong 24h.</p>
-            
-            <form className="space-y-5">
-              <div>
-                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Họ và tên</label>
-                <input 
-                  type="text" 
-                  placeholder="Họ và tên của bạn"
-                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Số điện thoại</label>
-                <input 
-                  type="tel" 
-                  placeholder="090 123 4567"
-                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Tên sân thể thao</label>
-                <input 
-                  type="text" 
-                  placeholder="VD: Pickleball Arena Quận 7"
-                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
-                />
-              </div>
-              <a
-                href="/cho-chu-san"
-                className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
-              >
-                Đăng ký sân ngay
-                <ArrowRight size={20} />
-              </a>
-              <p className="text-center text-[10px] text-neutral-400 font-medium">Cam kết bảo mật thông tin 100%.</p>
-            </form>
+            <p className="text-neutral-500 text-sm mb-8">Miễn phí 3 tháng đầu — không cần thẻ tín dụng.</p>
+
+            <a
+              href="/cho-chu-san"
+              className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+            >
+              Đăng ký sân ngay
+              <ArrowRight size={20} />
+            </a>
           </motion.div>
         </div>
       </section>
