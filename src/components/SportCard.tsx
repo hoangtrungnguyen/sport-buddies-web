@@ -6,54 +6,68 @@
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
 
-export interface SportCardProps {
-  /** Display name of the sport */
-  name: string;
-  /** Short tagline shown below the name (e.g. "Sân đơn và đôi · Trong nhà và ngoài trời") */
-  tagline: string;
-  /** Icon element for the sport */
-  icon: ReactNode;
-  /** Tailwind background colour class for the icon bubble */
-  iconBgClass: string;
-  /** Optional badge label (e.g. "Đang hot") */
-  badge?: string;
+export interface SportDetail {
+  label: string;
+  value: string;
 }
 
-/**
- * SportCard — informational card for one sport type in the MKT-004 Sports Section.
- *
- * Displays sport name, tagline and icon. An optional badge can highlight
- * trending or featured sports. Content is passed by the caller so that
- * each sport task (4.2–4.6) can supply its own copy without touching
- * the card structure.
- */
-export default function SportCard({ name, tagline, icon, iconBgClass, badge }: SportCardProps) {
+export interface SportCardProps {
+  /** DB sport_types key, e.g. "football", "badminton" */
+  sportKey: string;
+  name: string;
+  tagline: string;
+  description: string;
+  details: SportDetail[];
+  icon: ReactNode;
+  /** Tailwind bg class for the icon area, e.g. "bg-primary-light" */
+  accentBg: string;
+  /** Tailwind text class for the icon colour, e.g. "text-primary" */
+  accentText: string;
+}
+
+export default function SportCard({
+  name,
+  tagline,
+  description,
+  details,
+  icon,
+  accentBg,
+  accentText,
+}: SportCardProps) {
   return (
     <motion.div
-      whileHover={{ y: -6, scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="relative bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer group overflow-hidden"
+      whileHover={{ y: -6 }}
+      className="bg-white rounded-2xl border border-neutral-100 p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow"
     >
-      {/* Decorative background circle */}
-      <div className="absolute -right-6 -top-6 w-28 h-28 bg-primary-light/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-      {/* Badge */}
-      {badge && (
-        <span className="absolute top-4 right-4 bg-secondary-container text-white text-[10px] font-black px-2.5 py-1 rounded-full tracking-wider uppercase z-10">
-          {badge}
-        </span>
-      )}
-
       {/* Icon */}
       <div
-        className={`w-14 h-14 ${iconBgClass} rounded-xl flex items-center justify-center mb-5 relative z-10`}
+        className={`w-12 h-12 rounded-xl flex items-center justify-center ${accentBg} ${accentText}`}
       >
         {icon}
       </div>
 
-      {/* Text */}
-      <h3 className="text-lg font-bold mb-1.5 relative z-10">{name}</h3>
-      <p className="text-sm text-neutral-600 leading-relaxed relative z-10">{tagline}</p>
+      {/* Name & tagline */}
+      <div>
+        <h3 className="text-lg font-black text-neutral-900">{name}</h3>
+        <p className="text-sm font-semibold text-neutral-600 mt-0.5">{tagline}</p>
+      </div>
+
+      {/* Description */}
+      <p className="text-sm text-neutral-600 leading-relaxed flex-1">{description}</p>
+
+      {/* Detail rows */}
+      {details.length > 0 && (
+        <dl className="grid grid-cols-2 gap-x-4 gap-y-2 border-t border-neutral-100 pt-4">
+          {details.map(({ label, value }) => (
+            <div key={label} className="flex flex-col">
+              <dt className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">
+                {label}
+              </dt>
+              <dd className="text-sm font-bold text-neutral-900">{value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
     </motion.div>
   );
 }
