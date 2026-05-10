@@ -9,6 +9,13 @@ import { ArrowRight, Star, MapPin, Search, Bolt, ShieldCheck, Users } from 'luci
 const CUSTOMER_APP_URL: string = import.meta.env.VITE_CUSTOMER_APP_URL ?? '#';
 
 export default function HomeSection() {
+  const scrollToMkt002 = () => {
+    const target = document.getElementById('mkt-002');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const featuredCourts = [
     {
       id: 1,
@@ -89,15 +96,18 @@ export default function HomeSection() {
               <Search size={20} />
               Mở app ngay
             </a>
-            <button className="bg-white text-primary border-2 border-primary font-bold px-8 h-14 rounded-full hover:bg-primary-light transition-all flex items-center justify-center gap-2 active:scale-95">
-              Tìm hiểu thêm
+            <button
+              onClick={scrollToMkt002}
+              className="bg-white text-primary border-2 border-primary font-bold px-8 h-14 rounded-full hover:bg-primary-light transition-all flex items-center justify-center gap-2 active:scale-95"
+            >
+              Xem cách hoạt động
             </button>
           </div>
         </div>
       </section>
 
       {/* Why Choose Section */}
-      <section className="py-20 bg-white">
+      <section id="mkt-002" className="py-20 bg-white">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-black mb-4">Vì sao chọn SportBuddies?</h2>
