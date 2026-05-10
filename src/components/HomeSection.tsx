@@ -74,7 +74,7 @@ export default function HomeSection() {
             transition={{ delay: 0.2 }}
             className="text-lg text-neutral-600 max-w-2xl mx-auto mb-12"
           >
-            Khám phá phong trào thể thao đang gây sốt. Tìm kiếm, so sánh và đặt sân Pickleball chất lượng nhất tại TP.HCM chỉ với vài thao tác đơn giản.
+            Xem sân trống gần bạn trên bản đồ — chọn giờ — xác nhận. Không cần gọi điện.
           </motion.p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
