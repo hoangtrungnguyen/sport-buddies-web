@@ -30,12 +30,12 @@ export default function OwnerSection() {
               Giải pháp tối ưu doanh thu
             </motion.div>
             
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight"
             >
-              Lấp đầy giờ trống — <span className="text-primary">miễn phí 3 tháng</span>
+              Bạn là chủ sân?
             </motion.h1>
             
             <motion.p 
