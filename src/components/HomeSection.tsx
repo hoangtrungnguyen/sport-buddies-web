@@ -6,6 +6,8 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Star, MapPin, Search, Bolt, ShieldCheck, Users } from 'lucide-react';
 
+const CUSTOMER_APP_URL: string = import.meta.env.VITE_CUSTOMER_APP_URL ?? '#';
+
 export default function HomeSection() {
   const featuredCourts = [
     {
@@ -78,10 +80,15 @@ export default function HomeSection() {
           </motion.p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-primary text-white font-bold px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2">
+            <a
+              href={CUSTOMER_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-primary text-white font-bold px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
+            >
               <Search size={20} />
               Mở app ngay
-            </button>
+            </a>
             <button className="bg-white text-primary border-2 border-primary font-bold px-8 h-14 rounded-full hover:bg-primary-light transition-all flex items-center justify-center gap-2 active:scale-95">
               Tìm hiểu thêm
             </button>
