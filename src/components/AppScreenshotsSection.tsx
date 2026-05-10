@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { MapPin, Filter, Star, Clock, ChevronRight, CheckCircle, Calendar } from 'lucide-react';
 
@@ -13,10 +13,10 @@ function MapScreen() {
     <div className="w-full h-full bg-[#e8f5e9] flex flex-col">
       {/* Status bar */}
       <div className="flex items-center justify-between px-4 pt-3 pb-1">
-        <span className="text-[9px] font-black text-neutral-800">9:41</span>
+        <span className="text-[9px] font-black text-neutral-900">9:41</span>
         <div className="flex gap-1 items-center">
-          <div className="w-3 h-2 rounded-sm bg-neutral-800 opacity-70"></div>
-          <div className="w-2 h-2 rounded-full bg-neutral-800 opacity-70"></div>
+          <div className="w-3 h-2 rounded-sm bg-neutral-900 opacity-70"></div>
+          <div className="w-2 h-2 rounded-full bg-neutral-900 opacity-70"></div>
         </div>
       </div>
 
@@ -24,7 +24,7 @@ function MapScreen() {
       <div className="mx-3 mb-2">
         <div className="bg-white rounded-xl px-3 py-2 flex items-center gap-2 shadow-sm">
           <MapPin size={11} className="text-primary shrink-0" />
-          <span className="text-[9px] text-neutral-400 flex-1">Tìm sân gần bạn...</span>
+          <span className="text-[9px] text-neutral-600 flex-1">Tìm sân gần bạn...</span>
           <Filter size={10} className="text-primary" />
         </div>
       </div>
@@ -43,7 +43,7 @@ function MapScreen() {
         ))}
       </div>
 
-      {/* Map area */}
+      {/* Map area — hex colors intentionally off-token to represent map terrain colors */}
       <div className="flex-1 relative mx-3 mb-3 rounded-xl overflow-hidden bg-[#d4edda] border border-[#b8dfc3]">
         {/* Road grid lines */}
         <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
@@ -87,8 +87,8 @@ function MapScreen() {
 
         {/* Bottom label */}
         <div className="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1.5 shadow-sm">
-          <p className="text-[8px] font-black text-neutral-800">Sân gần bạn</p>
-          <p className="text-[7px] text-neutral-500">10 sân • bán kính 3km</p>
+          <p className="text-[8px] font-black text-neutral-900">Sân gần bạn</p>
+          <p className="text-[7px] text-neutral-600">10 sân • bán kính 3km</p>
         </div>
       </div>
     </div>
@@ -101,10 +101,10 @@ function CourtDetailScreen() {
     <div className="w-full h-full bg-white flex flex-col">
       {/* Status bar */}
       <div className="flex items-center justify-between px-4 pt-3 pb-1">
-        <span className="text-[9px] font-black text-neutral-800">9:41</span>
+        <span className="text-[9px] font-black text-neutral-900">9:41</span>
         <div className="flex gap-1 items-center">
-          <div className="w-3 h-2 rounded-sm bg-neutral-800 opacity-70"></div>
-          <div className="w-2 h-2 rounded-full bg-neutral-800 opacity-70"></div>
+          <div className="w-3 h-2 rounded-sm bg-neutral-900 opacity-70"></div>
+          <div className="w-2 h-2 rounded-full bg-neutral-900 opacity-70"></div>
         </div>
       </div>
 
@@ -128,7 +128,7 @@ function CourtDetailScreen() {
         <div className="flex items-start justify-between mb-1.5">
           <div>
             <p className="text-[10px] font-black text-neutral-900 leading-tight">Pickleball Arena Q7</p>
-            <p className="text-[8px] text-neutral-500 flex items-center gap-0.5 mt-0.5">
+            <p className="text-[8px] text-neutral-600 flex items-center gap-0.5 mt-0.5">
               <MapPin size={8} /> Nguyễn Văn Linh, Q7
             </p>
           </div>
@@ -164,7 +164,7 @@ function CourtDetailScreen() {
 
 // ----- Screen 3: Slot Picker -----
 function SlotPickerScreen() {
-  const dates = ['T2\n12', 'T3\n13', 'T4\n14', 'T5\n15'];
+  const dates: [string, string][] = [['T2', '12'], ['T3', '13'], ['T4', '14'], ['T5', '15']];
   const slots = [
     { time: '06:00', available: true },
     { time: '07:00', available: true },
@@ -181,52 +181,49 @@ function SlotPickerScreen() {
     <div className="w-full h-full bg-neutral-50 flex flex-col">
       {/* Status bar */}
       <div className="flex items-center justify-between px-4 pt-3 pb-1">
-        <span className="text-[9px] font-black text-neutral-800">9:41</span>
+        <span className="text-[9px] font-black text-neutral-900">9:41</span>
         <div className="flex gap-1 items-center">
-          <div className="w-3 h-2 rounded-sm bg-neutral-800 opacity-70"></div>
-          <div className="w-2 h-2 rounded-full bg-neutral-800 opacity-70"></div>
+          <div className="w-3 h-2 rounded-sm bg-neutral-900 opacity-70"></div>
+          <div className="w-2 h-2 rounded-full bg-neutral-900 opacity-70"></div>
         </div>
       </div>
 
       {/* Header */}
       <div className="px-3 mb-2">
         <p className="text-[10px] font-black text-neutral-900">Chọn giờ trống</p>
-        <p className="text-[8px] text-neutral-500">Pickleball Arena Q7</p>
+        <p className="text-[8px] text-neutral-600">Pickleball Arena Q7</p>
       </div>
 
       {/* Date tabs */}
       <div className="flex gap-1.5 px-3 mb-3">
-        {dates.map((d, i) => {
-          const [day, num] = d.split('\n');
-          return (
-            <button
-              key={i}
-              className={`flex-1 flex flex-col items-center py-1 rounded-lg text-[8px] font-bold ${
-                i === 0
-                  ? 'bg-primary text-white'
-                  : 'bg-white text-neutral-600 border border-neutral-200'
-              }`}
-            >
-              <span className="leading-none">{day}</span>
-              <span className="leading-none font-black text-[10px]">{num}</span>
-            </button>
-          );
-        })}
+        {dates.map(([day, num], i) => (
+          <button
+            key={i}
+            className={`flex-1 flex flex-col items-center py-1 rounded-lg text-[8px] font-bold ${
+              i === 0
+                ? 'bg-primary text-white'
+                : 'bg-white text-neutral-600 border border-neutral-200'
+            }`}
+          >
+            <span className="leading-none">{day}</span>
+            <span className="leading-none font-black text-[10px]">{num}</span>
+          </button>
+        ))}
       </div>
 
       {/* Legend */}
       <div className="flex gap-3 px-3 mb-2">
         <div className="flex items-center gap-1">
           <div className="w-2 h-2 rounded bg-primary-light border border-primary/30"></div>
-          <span className="text-[7px] text-neutral-500">Trống</span>
+          <span className="text-[7px] text-neutral-600">Trống</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-2 h-2 rounded bg-neutral-200"></div>
-          <span className="text-[7px] text-neutral-500">Hết</span>
+          <span className="text-[7px] text-neutral-600">Hết</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-2 h-2 rounded bg-primary"></div>
-          <span className="text-[7px] text-neutral-500">Đã chọn</span>
+          <span className="text-[7px] text-neutral-600">Đã chọn</span>
         </div>
       </div>
 
@@ -240,7 +237,7 @@ function SlotPickerScreen() {
                 ? 'bg-primary text-white'
                 : slot.available
                 ? 'bg-primary-light text-primary border border-primary/20'
-                : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                : 'bg-neutral-200 text-neutral-600 cursor-not-allowed'
             }`}
           >
             <Clock size={7} />
@@ -265,10 +262,10 @@ function BookingConfirmedScreen() {
     <div className="w-full h-full bg-white flex flex-col items-center justify-center px-4 relative">
       {/* Status bar */}
       <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-4 pt-3 pb-1">
-        <span className="text-[9px] font-black text-neutral-800">9:41</span>
+        <span className="text-[9px] font-black text-neutral-900">9:41</span>
         <div className="flex gap-1 items-center">
-          <div className="w-3 h-2 rounded-sm bg-neutral-800 opacity-70"></div>
-          <div className="w-2 h-2 rounded-full bg-neutral-800 opacity-70"></div>
+          <div className="w-3 h-2 rounded-sm bg-neutral-900 opacity-70"></div>
+          <div className="w-2 h-2 rounded-full bg-neutral-900 opacity-70"></div>
         </div>
       </div>
 
@@ -280,7 +277,7 @@ function BookingConfirmedScreen() {
       <p className="text-[12px] font-black text-neutral-900 text-center leading-tight mb-1">
         Đặt xong!
       </p>
-      <p className="text-[8px] text-neutral-500 text-center mb-4 px-2 leading-relaxed">
+      <p className="text-[8px] text-neutral-600 text-center mb-4 px-2 leading-relaxed">
         Chờ chủ sân duyệt — thường xác nhận trong 15 phút.
       </p>
 
@@ -291,8 +288,8 @@ function BookingConfirmedScreen() {
             <Calendar size={14} className="text-primary" />
           </div>
           <div>
-            <p className="text-[9px] font-black text-neutral-800">Pickleball Arena Q7</p>
-            <p className="text-[7px] text-neutral-500">Thứ Hai, 12/05 · 18:00 – 19:00</p>
+            <p className="text-[9px] font-black text-neutral-900">Pickleball Arena Q7</p>
+            <p className="text-[7px] text-neutral-600">Thứ Hai, 12/05 · 18:00 – 19:00</p>
           </div>
         </div>
 
@@ -316,7 +313,7 @@ interface PhoneMockupProps {
   children: ReactNode;
   label: string;
   delay?: number;
-  key?: React.Key;
+  key?: number;
 }
 
 function PhoneMockup({ children, label, delay = 0 }: PhoneMockupProps) {
@@ -346,6 +343,8 @@ function PhoneMockup({ children, label, delay = 0 }: PhoneMockupProps) {
 
 // ----- Main Section -----
 export default function AppScreenshotsSection() {
+  const appUrl = import.meta.env.VITE_CUSTOMER_APP_URL ?? '#';
+
   const screens = [
     {
       component: <MapScreen />,
@@ -393,7 +392,7 @@ export default function AppScreenshotsSection() {
 
         {/* Phone mockups:
             - Mobile: horizontal scroll carousel (overflow-x-auto, flex, snap-x snap-mandatory)
-            - Desktop md+: 2-column grid (grid grid-cols-2 gap-6) */}
+            - Desktop md+: 4-column grid */}
         <div className="md:hidden overflow-x-auto flex gap-4 snap-x snap-mandatory pb-4 -mx-6 px-6">
           {screens.map((screen, i) => (
             <PhoneMockup key={i} label={screen.label} delay={screen.delay}>
@@ -402,13 +401,31 @@ export default function AppScreenshotsSection() {
           ))}
         </div>
 
-        <div className="hidden md:grid grid-cols-2 gap-6 justify-items-center">
+        <div className="hidden md:flex gap-6 justify-center">
           {screens.map((screen, i) => (
             <PhoneMockup key={i} label={screen.label} delay={screen.delay}>
               {screen.component}
             </PhoneMockup>
           ))}
         </div>
+
+        {/* CTA at bottom */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex justify-center mt-12"
+        >
+          <a
+            href={appUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-primary text-white font-black px-10 h-14 rounded-full hover:bg-primary-container hover:shadow-lg hover:scale-105 transition-all active:scale-95 flex items-center justify-center text-base"
+          >
+            Mở app ngay
+          </a>
+        </motion.div>
       </div>
     </section>
   );
