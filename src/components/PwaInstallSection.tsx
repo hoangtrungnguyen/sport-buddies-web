@@ -6,8 +6,7 @@
 import { motion } from 'motion/react';
 import { Smartphone, Monitor, Share, PlusSquare, MoreHorizontal, ArrowDownToLine } from 'lucide-react';
 
-const CUSTOMER_APP_URL: string =
-  (import.meta as unknown as { env: Record<string, string | undefined> }).env.VITE_CUSTOMER_APP_URL ?? '#';
+const CUSTOMER_APP_URL: string = import.meta.env.VITE_CUSTOMER_APP_URL ?? '#';
 
 export default function PwaInstallSection() {
   return (
