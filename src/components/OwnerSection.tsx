@@ -98,13 +98,13 @@ export default function OwnerSection() {
                   className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
                 />
               </div>
-              <button 
-                type="submit"
+              <a
+                href="/cho-chu-san"
                 className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
               >
                 Đăng ký sân ngay
                 <ArrowRight size={20} />
-              </button>
+              </a>
               <p className="text-center text-[10px] text-neutral-400 font-medium">Cam kết bảo mật thông tin 100%.</p>
             </form>
           </motion.div>
