@@ -3,10 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { ReactNode } from 'react';
+import { type ReactNode, useMemo } from 'react';
 import { motion } from 'motion/react';
 import { Smartphone, Share, SquarePlus, MoreVertical, Download } from 'lucide-react';
-import { usePlatform } from '../hooks/usePlatform';
+import { getPlatform } from '../hooks/usePlatform';
 
 interface InstallStepProps {
   number: number;
@@ -97,7 +97,7 @@ function AndroidInstallCard() {
 }
 
 export default function PwaInstallSection() {
-  const platform = usePlatform();
+  const platform = useMemo(() => getPlatform(), []);
 
   return (
     <section

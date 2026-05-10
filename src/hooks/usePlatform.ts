@@ -11,9 +11,13 @@ export type Platform = 'ios' | 'android' | 'other';
  * Returns:
  *  - 'ios'     — iPhone, iPad, or iPod touch
  *  - 'android' — Android device
- *  - 'other'   — desktop browser or unrecognised user agent
+ *  - 'other'   — desktop browser, SSR context, or unrecognised user agent
  */
-export function usePlatform(): Platform {
+export function getPlatform(): Platform {
+  if (typeof navigator === 'undefined') {
+    return 'other';
+  }
+
   const ua = navigator.userAgent;
 
   if (/iphone|ipad|ipod/i.test(ua)) {
