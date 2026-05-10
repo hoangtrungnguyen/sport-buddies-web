@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, CalendarDays, BellRing, BarChart3 } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, BarChart3 } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -151,9 +151,12 @@ export default function OwnerSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: <CalendarDays className="text-primary" />, bg: "bg-primary-light", title: "Quản lý lịch trực quan", desc: "Xem toàn bộ lịch đặt theo tuần, cập nhật giờ trống tức thì mà không cần gọi điện." },
-              { icon: <BellRing className="text-warning" />, bg: "bg-warning-bg", title: "Nhận thông báo đặt sân ngay lập tức", desc: "Nhận thông báo tức thì mỗi khi có lượt đặt mới — không bỏ lỡ bất kỳ khách hàng nào." },
-              { icon: <BarChart3 className="text-success" />, bg: "bg-success-bg", title: "Báo cáo doanh thu chi tiết", desc: "Theo dõi doanh thu theo ngày, tuần, tháng và tối ưu hoá các khung giờ vắng khách." }
+              {
+                icon: <BarChart3 className="text-success" />,
+                bg: "bg-success-bg",
+                title: "Xem doanh thu và giờ cao điểm",
+                desc: "Theo dõi doanh thu theo ngày, tuần, tháng và xác định khung giờ cao điểm để tối ưu hoá lịch sân."
+              }
             ].map((item, i) => (
               <motion.div
                 key={i}
