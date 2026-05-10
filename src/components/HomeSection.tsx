@@ -17,6 +17,14 @@ const MAP_PINS = [
   { id: 'pin-red-2',    color: '#ba1a1a', label: 'Full',            cx: '40%', cy: '72%' },
 ] as const;
 
+const SPORT_FILTER_CHIPS = [
+  { label: 'Tất cả', active: true },
+  { label: 'Bóng đá', active: false },
+  { label: 'Cầu lông', active: false },
+  { label: 'Pickleball', active: false },
+  { label: 'Tennis', active: false },
+] as const;
+
 export default function HomeSection() {
   const scrollToMkt002 = () => {
     const target = document.getElementById('mkt-002');
@@ -117,7 +125,7 @@ export default function HomeSection() {
               </div>
             </div>
 
-            {/* Right: Phone mockup with map screen */}
+            {/* Right: Phone mockup with map screen and sport filter chips */}
             <div className="relative flex justify-center lg:justify-end">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -129,7 +137,7 @@ export default function HomeSection() {
                 {/* Phone frame */}
                 <div className="relative rounded-[2.5rem] bg-neutral-900 shadow-2xl border-[8px] border-neutral-900 overflow-hidden aspect-[9/19]">
 
-                  {/* Mock map screen background — soft green tile */}
+                  {/* Mock map screen background */}
                   <div className="absolute inset-0 bg-gradient-to-b from-green-50 to-green-100">
 
                     {/* Decorative map grid lines */}
@@ -158,6 +166,7 @@ export default function HomeSection() {
                       <line x1="60%" y1="0" x2="65%" y2="100%" stroke="#d1d5db" strokeWidth="2" opacity="0.4"/>
                     </svg>
 
+
                     {/* Court availability pins */}
                     <svg
                       data-testid="map-pins"
@@ -170,7 +179,6 @@ export default function HomeSection() {
                           <feDropShadow dx="0" dy="1" stdDeviation="1.5" floodColor="#000000" floodOpacity="0.25"/>
                         </filter>
                       </defs>
-
                       {MAP_PINS.map((pin) => (
                         <g key={pin.id} filter="url(#pin-shadow)">
                           <circle cx={pin.cx} cy={pin.cy} r="9" fill="white" />
@@ -183,9 +191,29 @@ export default function HomeSection() {
                   </div>
 
                   {/* Top bar */}
-                  <div className="absolute top-0 left-0 right-0 z-10 bg-white/80 backdrop-blur-sm px-3 py-2 flex items-center gap-2 border-b border-neutral-100">
+                  <div className="absolute top-0 left-0 right-0 z-20 bg-white/80 backdrop-blur-sm px-3 py-2 flex items-center gap-2 border-b border-neutral-100">
                     <MapPin size={12} className="text-primary flex-shrink-0" />
                     <span className="text-[10px] font-bold text-neutral-800 truncate">Sân gần bạn</span>
+                  </div>
+
+                  {/* Sport filter chips — below top bar */}
+                  <div
+                    aria-label="sport-filter-chips"
+                    className="absolute top-8 left-0 right-0 z-10 flex gap-1.5 px-3 overflow-x-auto"
+                  >
+                    {SPORT_FILTER_CHIPS.map((chip) => (
+                      <span
+                        key={chip.label}
+                        className={[
+                          'flex-shrink-0 px-2.5 py-1 rounded-full text-[10px] font-bold shadow-sm border whitespace-nowrap',
+                          chip.active
+                            ? 'bg-primary text-white border-primary'
+                            : 'bg-white text-neutral-700 border-neutral-200',
+                        ].join(' ')}
+                      >
+                        {chip.label}
+                      </span>
+                    ))}
                   </div>
 
                   {/* Legend strip */}
