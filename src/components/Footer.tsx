@@ -3,27 +3,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Facebook } from 'lucide-react';
+/** Placeholder Zalo support number — replace with the real OA link before go-live. */
+const ZALO_SUPPORT_URL = "https://zalo.me/0900000000";
 
-/** Inline SVG for TikTok (not available in lucide-react) */
-function TikTokIcon({ size = 16, className = '' }: { size?: number; className?: string }) {
+function ZaloBadge() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
+    <span
+      className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#0068FF] text-white text-[10px] font-bold leading-none mr-1.5 shrink-0"
       aria-hidden="true"
     >
-      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.53V6.78a4.85 4.85 0 0 1-1.01-.09z" />
-    </svg>
+      ZL
+    </span>
   );
 }
-
-const FACEBOOK_URL = 'https://facebook.com/sportbuddies';
-const TIKTOK_URL = 'https://tiktok.com/@sportbuddies';
 
 export default function Footer() {
   return (
@@ -50,7 +42,18 @@ export default function Footer() {
           <h4 className="font-bold text-neutral-900 mb-4 uppercase tracking-wider text-xs">Hỗ trợ</h4>
           <ul className="space-y-3 text-sm">
             <li><a href="#" className="text-neutral-500 hover:text-primary transition-colors">Liên hệ chúng tôi</a></li>
-            <li><a href="#" className="text-neutral-500 hover:text-primary transition-colors">Hỗ trợ qua Zalo</a></li>
+            <li>
+              <a
+                href={ZALO_SUPPORT_URL}
+                className="inline-flex items-center text-neutral-500 hover:text-primary transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Hỗ trợ qua Zalo"
+              >
+                <ZaloBadge />
+                Hỗ trợ qua Zalo
+              </a>
+            </li>
             <li><a href="#" className="text-neutral-500 hover:text-primary transition-colors">Câu hỏi thường gặp</a></li>
           </ul>
         </div>
