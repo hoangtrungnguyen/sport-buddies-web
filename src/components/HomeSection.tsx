@@ -67,7 +67,7 @@ export default function HomeSection() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-20 sm:pt-32 pb-10 sm:pb-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1AukG-N-YXS4jrelrsaZ7h3UON7vFIzKBHmNYV2aNeqIhQXXkWWJhr92Z3dzKJbTZ-gFHpGRKDRcUUtRad7KUQARDznm7J25v3Shzqw-R3ZgH9pAtmSqQmBpp90_VbC9hJajfVQGWEz32lmWMsYg-iGYiXMqRktoeuwp1moHPVIa6cCO-DRZptybatu8JG890ThOBSmFGxtgWGY4AhPFOTm1t8a98bvxuK_6cpqng866eclKMoz0Bh15Ph1K1peS0RiIubxIrbyLO"
@@ -84,7 +84,7 @@ export default function HomeSection() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 bg-primary-light text-primary px-4 py-2 rounded-full mb-8 font-semibold text-sm border border-primary/10"
+                className="inline-flex items-center gap-2 bg-primary-light text-primary px-4 py-2 rounded-full mb-4 sm:mb-8 font-semibold text-sm border border-primary/10"
               >
                 #1 Pickleball Platform in HCMC
               </motion.div>
@@ -92,7 +92,7 @@ export default function HomeSection() {
               <motion.h1
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-4xl md:text-5xl font-black mb-8 leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 sm:mb-8 leading-tight"
               >
                 Đặt sân thể thao tại Sài Gòn trong 30 giây
               </motion.h1>
@@ -101,24 +101,24 @@ export default function HomeSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg text-neutral-600 mb-12"
+                className="text-base sm:text-lg text-neutral-600 mb-6 sm:mb-12"
               >
                 Xem sân trống gần bạn trên bản đồ — chọn giờ — xác nhận. Không cần gọi điện.
               </motion.p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                 <a
                   href={CUSTOMER_APP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-primary text-white font-bold px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
+                  className="bg-primary text-white font-bold px-8 h-12 sm:h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
                 >
                   <Search size={20} />
                   Mở app ngay
                 </a>
                 <button
                   onClick={scrollToMkt002}
-                  className="bg-white text-primary border-2 border-primary font-bold px-8 h-14 rounded-full hover:bg-primary-light transition-all flex items-center justify-center gap-2 active:scale-95"
+                  className="bg-white text-primary border-2 border-primary font-bold px-8 h-12 sm:h-14 rounded-full hover:bg-primary-light transition-all flex items-center justify-center gap-2 active:scale-95"
                 >
                   Xem cách hoạt động
                 </button>
@@ -165,7 +165,6 @@ export default function HomeSection() {
                       <line x1="0" y1="65%" x2="100%" y2="60%" stroke="#d1d5db" strokeWidth="2" opacity="0.4"/>
                       <line x1="60%" y1="0" x2="65%" y2="100%" stroke="#d1d5db" strokeWidth="2" opacity="0.4"/>
                     </svg>
-
 
                     {/* Court availability pins */}
                     <svg
