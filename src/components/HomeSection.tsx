@@ -28,6 +28,8 @@ const SPORT_FILTER_CHIPS = [
 ] as const;
 
 export default function HomeSection() {
+  // MKT-003 task 3.3: fallback behaviour — hook initialises with FALLBACK_COUNTS so
+  // loading is always false and stats are always visible (no spinner).
   const { courtCount, bookingCount } = useStatsBarCounts();
 
   const scrollToMkt002 = () => {
@@ -246,8 +248,8 @@ export default function HomeSection() {
         </div>
       </section>
 
-      {/* Stats Bar — MKT-003: live court/booking counts via mock Supabase */}
-      <StatsBar courtCount={courtCount ?? 52} bookingCount={bookingCount ?? 1840} />
+      {/* Stats Bar — MKT-003: live counts with immediate fallback (task 3.3) */}
+      <StatsBar courtCount={courtCount} bookingCount={bookingCount} />
 
       {/* How It Works — MKT-002 */}
       <section id="mkt-002" className="py-20 bg-white">
