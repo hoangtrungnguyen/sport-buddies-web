@@ -27,8 +27,8 @@ test.describe('Hero section — above the fold on iPhone SE (375×667)', () => {
     const box = await heroSection.boundingBox();
 
     expect(box).not.toBeNull();
-    // The bottom of the hero section must fit within the viewport height
-    expect(box!.y + box!.height).toBeLessThanOrEqual(IPHONE_SE.height);
+    // The bottom of the hero section must fit within the viewport height (accounting for fixed navbar)
+    expect(box!.y + box!.height).toBeLessThanOrEqual(IPHONE_SE.height - NAVBAR_HEIGHT);
   });
 
   test('badge/tagline pill is visible above the fold', async ({ page }) => {
