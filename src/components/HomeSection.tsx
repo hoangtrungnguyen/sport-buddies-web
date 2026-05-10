@@ -82,6 +82,8 @@ export default function HomeSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={CUSTOMER_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-primary text-white font-bold px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
             >
               <Search size={20} />
