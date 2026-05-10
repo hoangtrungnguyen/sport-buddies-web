@@ -9,23 +9,21 @@ import SportCard, { type SportCardProps } from './SportCard';
 /**
  * Sport data matching `sport_types` values in the SportBuddies DB.
  *
- * Individual card content (description, tagline, details) is intentionally
- * minimal here — tasks 4.2–4.6 will replace/extend each entry with
- * sport-specific copy. The structure (keys) must remain stable so those
- * tasks can update without touching SportsSection itself.
+ * grava-8a6d.4.2: Bóng đá card — tagline "5vs5, 7vs7 · Sân cỏ nhân tạo"
+ * as specified in the task title (MKT-004 sports section).
  */
 const SPORTS: SportCardProps[] = [
   {
     sportKey: 'bong-da',
     name: 'Bóng đá',
-    tagline: 'Vua của các môn thể thao',
+    tagline: '5vs5, 7vs7 · Sân cỏ nhân tạo',
     description:
-      'Môn thể thao vua với hàng triệu người chơi tại Việt Nam. Từ sân bóng 5 người đến sân 11 người, SportBuddies giúp bạn tìm sân và đối tác dễ dàng.',
+      'Môn thể thao vua với hàng triệu người chơi tại Việt Nam. Tìm sân bóng đá 5 người, 7 người cỏ nhân tạo và đối tác dễ dàng qua SportBuddies.',
     details: [
-      { label: 'Số người', value: '5v5 – 11v11' },
+      { label: 'Hình thức', value: '5vs5, 7vs7' },
       { label: 'Loại sân', value: 'Cỏ nhân tạo' },
       { label: 'Thời gian', value: '60 – 90 phút' },
-      { label: 'Hình thức', value: 'Phong trào' },
+      { label: 'Phong cách', value: 'Phong trào' },
     ],
     icon: '⚽',
     accentClass: 'bg-success',
@@ -102,7 +100,7 @@ const SPORTS: SportCardProps[] = [
  *
  * Displays a heading + responsive 5-card grid of sport types supported by
  * the SportBuddies platform. Each card uses the SportCard component which
- * exposes a stable content interface so tasks 4.2–4.6 can update individual
+ * exposes a stable content interface so tasks 4.3–4.6 can update individual
  * cards independently.
  */
 export default function SportsSection() {
