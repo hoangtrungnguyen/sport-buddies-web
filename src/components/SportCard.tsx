@@ -4,70 +4,86 @@
  */
 
 import { motion } from 'motion/react';
-import type { ReactNode } from 'react';
-
-export interface SportDetail {
-  label: string;
-  value: string;
-}
 
 export interface SportCardProps {
-  /** DB sport_types key, e.g. "football", "badminton" */
+  /** Internal DB key matching `sport_types` values */
   sportKey: string;
+  /** Display name of the sport */
   name: string;
+  /** Short tagline shown below the name */
   tagline: string;
+  /** One-paragraph description of the sport */
   description: string;
-  details: SportDetail[];
-  icon: ReactNode;
-  /** Tailwind bg class for the icon area, e.g. "bg-primary-light" */
-  accentBg: string;
-  /** Tailwind text class for the icon colour, e.g. "text-primary" */
-  accentText: string;
+  /** Key details (e.g. court type, player count, format) */
+  details: Array<{ label: string; value: string }>;
+  /** Emoji or short symbol representing the sport */
+  icon: string;
+  /** Tailwind accent colour class for the card's top border / badge */
+  accentClass: string;
+  /** Tailwind background colour class for the icon bubble */
+  iconBgClass: string;
 }
 
+/**
+ * SportCard — informational card for one sport type.
+ *
+ * Content (name, tagline, description, details) is supplied by the caller so
+ * that each sport-card task can fill in sport-specific copy without touching
+ * this component's structure.
+ */
 export default function SportCard({
   name,
   tagline,
   description,
   details,
   icon,
-  accentBg,
-  accentText,
+  accentClass,
+  iconBgClass,
 }: SportCardProps) {
   return (
     <motion.div
       whileHover={{ y: -6 }}
-      className="bg-white rounded-2xl border border-neutral-100 p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow"
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      className="group relative bg-white rounded-3xl border border-neutral-100 shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col"
     >
-      {/* Icon */}
-      <div
-        className={`w-12 h-12 rounded-xl flex items-center justify-center ${accentBg} ${accentText}`}
-      >
-        {icon}
+      {/* Accent top bar */}
+      <div className={`h-1.5 w-full ${accentClass}`} />
+
+      <div className="p-7 flex flex-col gap-5 flex-1">
+        {/* Icon + Name */}
+        <div className="flex items-center gap-4">
+          <div
+            className={`w-14 h-14 rounded-2xl ${iconBgClass} flex items-center justify-center text-3xl shrink-0`}
+            aria-hidden="true"
+          >
+            {icon}
+          </div>
+          <div>
+            <h3 className="text-xl font-black leading-tight">{name}</h3>
+            <p className="text-sm text-primary font-semibold mt-0.5">{tagline}</p>
+          </div>
+        </div>
+
+        {/* Description */}
+        <p className="text-neutral-600 leading-relaxed text-sm flex-1">{description}</p>
+
+        {/* Key details */}
+        {details.length > 0 && (
+          <dl className="grid grid-cols-2 gap-3">
+            {details.map(({ label, value }, idx) => (
+              <div
+                key={`${label}-${idx}`}
+                className="bg-neutral-50 rounded-xl px-3 py-2.5 border border-neutral-100"
+              >
+                <dt className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 mb-0.5">
+                  {label}
+                </dt>
+                <dd className="text-sm font-bold text-on-surface">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
       </div>
-
-      {/* Name & tagline */}
-      <div>
-        <h3 className="text-lg font-black text-neutral-900">{name}</h3>
-        <p className="text-sm font-semibold text-neutral-600 mt-0.5">{tagline}</p>
-      </div>
-
-      {/* Description */}
-      <p className="text-sm text-neutral-600 leading-relaxed flex-1">{description}</p>
-
-      {/* Detail rows */}
-      {details.length > 0 && (
-        <dl className="grid grid-cols-2 gap-x-4 gap-y-2 border-t border-neutral-100 pt-4">
-          {details.map(({ label, value }) => (
-            <div key={label} className="flex flex-col">
-              <dt className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">
-                {label}
-              </dt>
-              <dd className="text-sm font-bold text-neutral-900">{value}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
     </motion.div>
   );
 }
