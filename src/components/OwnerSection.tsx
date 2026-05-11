@@ -145,44 +145,30 @@ export default function OwnerSection() {
       <section className="py-24 bg-background">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-black mb-4">SportBuddies mang lại gì cho bạn?</h2>
-            <p className="text-neutral-600 max-w-xl mx-auto">Công cụ quản lý sân chuyên nghiệp — đúng những tính năng chủ sân thực sự cần.</p>
+            <h2 className="text-3xl font-black mb-4">Tính năng dành cho chủ sân</h2>
+            <p className="text-neutral-600 max-w-xl mx-auto">Mọi công cụ bạn cần để vận hành sân chuyên nghiệp — ngay trên điện thoại.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              {
-                icon: <CalendarDays size={28} className="text-primary" />,
-                bg: "bg-success-bg",
-                title: "Quản lý lịch sân",
-                desc: "Xem và điều phối toàn bộ lịch đặt sân trên một bảng điều khiển duy nhất, tránh trùng lịch và sai sót."
-              },
-              {
-                icon: <BellRing size={28} className="text-primary" />,
-                bg: "bg-success-bg",
-                title: "Nhận đặt sân tự động",
-                desc: "Khách đặt sân 24/7 trực tiếp qua ứng dụng — không cần nghe điện thoại, không lo bỏ lỡ đơn."
-              },
-              {
-                icon: <BarChart3 size={28} className="text-primary" />,
-                bg: "bg-success-bg",
-                title: "Thống kê doanh thu",
-                desc: "Báo cáo doanh thu theo ngày, tuần, tháng giúp bạn nắm rõ hiệu suất và tối ưu giá thuê sân."
-              }
-            ].map((benefit, i) => (
+              { icon: <CalendarDays className="text-primary" />, bg: "bg-primary-light", title: "Quản lý lịch trực quan", desc: "Xem toàn bộ lịch đặt theo tuần, cập nhật giờ trống tức thì mà không cần gọi điện." },
+              { icon: <BellRing className="text-warning" />, bg: "bg-warning-bg", title: "Nhận thông báo đặt sân ngay lập tức", desc: "Nhận thông báo tức thì mỗi khi có lượt đặt mới — không bỏ lỡ bất kỳ khách hàng nào." },
+              { icon: <BarChart3 className="text-success" />, bg: "bg-success-bg", title: "Báo cáo doanh thu chi tiết", desc: "Theo dõi doanh thu theo ngày, tuần, tháng và tối ưu hoá các khung giờ vắng khách." }
+            ].map((item, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -5 }}
                 className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
               >
-                <div className={`w-14 h-14 ${benefit.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  {benefit.icon}
+                <div className={`w-14 h-14 ${item.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  {item.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
-                <p className="text-neutral-500 leading-relaxed text-sm">{benefit.desc}</p>
+                <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                <p className="text-neutral-500 leading-relaxed text-sm">{item.desc}</p>
               </motion.div>
             ))}
           </div>
