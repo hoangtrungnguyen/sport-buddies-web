@@ -1,26 +1,41 @@
+/**
+ * useStatsBarCounts — grava-8a6d.3.3
+ *
+ * Fetches live court and booking counts from Supabase.
+ * Fallback behavior (this task): if the Supabase call fails for any reason,
+ * the hook immediately returns FALLBACK_COUNTS — no loading spinner is ever
+ * shown to the user. The state is initialised with fallback values so the
+ * component can render immediately, and only switches to live data on a
+ * successful response.
+ */
+
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
 export interface StatsBarCounts {
-  courtCount: number | null;
-  bookingCount: number | null;
+  courtCount: number;
+  bookingCount: number;
+  /** Always false from the caller's perspective — fallback renders immediately. */
   loading: boolean;
   error: string | null;
 }
 
+/** Hardcoded placeholder values shown when live data is unavailable. */
+export const FALLBACK_COUNTS = {
+  courtCount: 150,
+  bookingCount: 5000,
+} as const;
+
 export function useStatsBarCounts(): StatsBarCounts {
-  const [courtCount, setCourtCount] = useState<number | null>(null);
-  const [bookingCount, setBookingCount] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
+  // Initialise with fallback so the component renders immediately without a spinner.
+  const [courtCount, setCourtCount] = useState<number>(FALLBACK_COUNTS.courtCount);
+  const [bookingCount, setBookingCount] = useState<number>(FALLBACK_COUNTS.bookingCount);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
 
     async function fetchCounts() {
-      setLoading(true);
-      setError(null);
-
       try {
         const [courtsResult, bookingsResult] = await Promise.all([
           supabase
@@ -41,16 +56,19 @@ export function useStatsBarCounts(): StatsBarCounts {
           throw new Error(`Bookings fetch failed: ${bookingsResult.error.message}`);
         }
 
-        setCourtCount(courtsResult.count ?? 0);
-        setBookingCount(bookingsResult.count ?? 0);
+        // Live data arrived — upgrade from fallback to real counts.
+        setCourtCount(courtsResult.count ?? FALLBACK_COUNTS.courtCount);
+        setBookingCount(bookingsResult.count ?? FALLBACK_COUNTS.bookingCount);
+        setError(null);
       } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Unknown error');
+        if (cancelled) return;
+        // Keep the already-rendered fallback values; just record the error.
+        const message = err instanceof Error ? err.message : 'Unknown error';
+        setError(message);
+        if (import.meta.env.DEV) {
+          console.error('[useStatsBarCounts] Supabase fetch failed, showing fallback:', message);
         }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        // courtCount/bookingCount remain at FALLBACK_COUNTS — no setState needed.
       }
     }
 
@@ -61,5 +79,6 @@ export function useStatsBarCounts(): StatsBarCounts {
     };
   }, []);
 
-  return { courtCount, bookingCount, loading, error };
+  // loading is always false: fallback renders immediately on mount.
+  return { courtCount, bookingCount, loading: false, error };
 }

@@ -3,17 +3,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/**
+ * StatsBar — MKT-003 Stats Bar component.
+ *
+ * Displays "X sân đang hoạt động · Y lượt đặt sân".
+ * Data is provided by useStatsBarCounts (task 3.1).
+ * Fallback behaviour (task 3.3): hook initialises with FALLBACK_COUNTS so this
+ * component always receives real numbers — no loading skeleton needed here.
+ */
 interface StatsBarProps {
   courtCount: number;
   bookingCount: number;
 }
 
-/**
- * MKT-003 Stats Bar — displays live court and booking counts.
- * Data fetching is handled by the parent (task 3.1).
- * Fallback behaviour is handled by task 3.3.
- * Positioning in the page layout is governed by task 3.4.
- */
 export default function StatsBar({ courtCount, bookingCount }: StatsBarProps) {
   return (
     <div className="bg-primary-light/60 border-y border-primary/10">
