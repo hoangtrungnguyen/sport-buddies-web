@@ -6,6 +6,7 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Star, MapPin, Search, Bolt, ShieldCheck, Users, Map as MapIcon, Sliders, Clock, BellRing, Timer } from 'lucide-react';
 import StatsBar from './StatsBar';
+import { useStatsBarCounts } from '../hooks/useStatsBarCounts';
 
 const CUSTOMER_APP_URL: string = import.meta.env.VITE_CUSTOMER_APP_URL ?? '#';
 
@@ -27,6 +28,8 @@ const SPORT_FILTER_CHIPS = [
 ] as const;
 
 export default function HomeSection() {
+  const { courtCount, bookingCount } = useStatsBarCounts();
+
   const scrollToMkt002 = () => {
     const target = document.getElementById('mkt-002');
     if (target) {
@@ -243,8 +246,8 @@ export default function HomeSection() {
         </div>
       </section>
 
-      {/* Stats Bar — MKT-003: positioned between hero and how-it-works */}
-      <StatsBar courtCount={52} bookingCount={1840} />
+      {/* Stats Bar — MKT-003: live court/booking counts via mock Supabase */}
+      <StatsBar courtCount={courtCount ?? 52} bookingCount={bookingCount ?? 1840} />
 
       {/* How It Works — MKT-002 */}
       <section id="mkt-002" className="py-20 bg-white">
