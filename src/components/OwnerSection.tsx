@@ -4,7 +4,9 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
+import { PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
+import LeadForm, { LeadFormData } from './LeadForm';
+import { submitLead } from '../lib/submitLead';
 
 export default function OwnerSection() {
   const avatars = [
@@ -13,15 +15,19 @@ export default function OwnerSection() {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAGix6TXOS_EkhOfiOn3ZFz7kbKUQ29l3pTZbdLtOW3h9JAGR5hgtpBWbIh5uOt2-vbecIYHTdS_tFiEfpGc2E1Rac2nC54Idpf2vo8X2dIb6znuQzU92ri9R4dQ5i0dyz0FQ9j05EY27c8vjGbcRFISvaM1DvfI2T3AvHgNu_1H-ioXCEDryB5kgz34Ore6MxHoyqixLdN2gyPf6bE9Iu9ea5-Q2e-o6imvpGKCO2RaFCWm2rCyIKHbG9JwGy3lGe0oAXDwxjT2nyd"
   ];
 
+  const handleLeadSubmit = async (data: LeadFormData): Promise<void> => {
+    await submitLead(data);
+  };
+
   return (
     <>
       <section className="relative pt-32 pb-24 overflow-hidden bg-background">
         <div className="absolute top-0 right-0 -mr-64 -mt-32 w-[600px] h-[600px] bg-primary-light rounded-full blur-[120px] opacity-40 pointer-events-none"></div>
-        
+
         <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
           {/* Hero Content */}
           <div className="lg:col-span-7">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className="inline-flex items-center gap-2 bg-success-bg text-primary px-4 py-2 rounded-full mb-8 font-bold text-sm border border-primary/10 shadow-sm"
@@ -29,16 +35,16 @@ export default function OwnerSection() {
               <CheckCircle2 size={16} className="fill-primary text-white" />
               Giải pháp tối ưu doanh thu
             </motion.div>
-            
-            <motion.h1 
+
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight"
             >
               Lấp đầy giờ trống — <span className="text-primary">miễn phí 3 tháng</span>
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
@@ -46,14 +52,14 @@ export default function OwnerSection() {
             >
               SportBuddies giúp chủ sân thể thao dễ dàng quản lý lịch đặt, tiếp cận hàng ngàn khách hàng mới mỗi ngày và tối đa hóa lợi nhuận mà không tốn công sức.
             </motion.p>
-            
+
             <div className="flex items-center gap-4">
               <div className="flex -space-x-3">
                 {avatars.map((url, i) => (
-                  <img 
-                    key={i} 
-                    src={url} 
-                    alt="Owner" 
+                  <img
+                    key={i}
+                    src={url}
+                    alt="Owner"
                     className="w-12 h-12 rounded-full border-4 border-white object-cover shadow-sm bg-neutral-100"
                   />
                 ))}
@@ -65,48 +71,15 @@ export default function OwnerSection() {
           </div>
 
           {/* Form Card */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="lg:col-span-5 bg-white rounded-3xl shadow-2xl p-8 border border-neutral-100"
           >
             <h3 className="text-2xl font-black mb-2">Bắt đầu ngay hôm nay</h3>
             <p className="text-neutral-500 text-sm mb-8">Điền thông tin để nhận tư vấn miễn phí trong 24h.</p>
-            
-            <form className="space-y-5">
-              <div>
-                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Họ và tên</label>
-                <input 
-                  type="text" 
-                  placeholder="Họ và tên của bạn"
-                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Số điện thoại</label>
-                <input 
-                  type="tel" 
-                  placeholder="090 123 4567"
-                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Tên sân thể thao</label>
-                <input 
-                  type="text" 
-                  placeholder="VD: Pickleball Arena Quận 7"
-                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
-                />
-              </div>
-              <button 
-                type="submit"
-                className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
-              >
-                Đăng ký sân ngay
-                <ArrowRight size={20} />
-              </button>
-              <p className="text-center text-[10px] text-neutral-400 font-medium">Cam kết bảo mật thông tin 100%.</p>
-            </form>
+
+            <LeadForm onSubmit={handleLeadSubmit} />
           </motion.div>
         </div>
       </section>
@@ -118,14 +91,14 @@ export default function OwnerSection() {
             <h2 className="text-3xl font-black mb-4">Bạn đang gặp khó khăn gì?</h2>
             <p className="text-neutral-600 max-w-xl mx-auto">Vận hành sân bãi thủ công tốn nhiều thời gian và dễ dẫn đến thất thoát.</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { icon: <PhoneOff className="text-error" />, bg: "bg-error-container/30", title: "Bỏ lỡ booking vì điện thoại bận", desc: "Khách gọi đặt sân nhưng điện thoại bận, không ai nghe — booking tuột khỏi tay." },
               { icon: <Hourglass className="text-warning" />, bg: "bg-warning-bg", title: "Giờ trống lãng phí", desc: "Nhiều khung giờ (sáng, trưa) vắng khách trong khi vẫn phải trả chi phí." },
               { icon: <TrendingDown className="text-neutral-600" />, bg: "bg-neutral-100", title: "Khó tiếp cận khách mới", desc: "Phụ thuộc vào khách quen, không có kênh quảng bá hiệu quả." }
             ].map((item, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 whileHover={{ y: -5 }}
                 className="bg-neutral-50 p-8 rounded-3xl border border-neutral-100 group transition-all"
