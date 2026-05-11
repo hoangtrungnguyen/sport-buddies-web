@@ -32,10 +32,16 @@ export default function LeadForm({ onSubmit }: LeadFormProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+
+    if (!name.trim() || !phone.trim() || !courtName.trim()) {
+      setError('Vui lòng điền đầy đủ họ tên, số điện thoại và tên sân.');
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await onSubmit({ name, phone, court_name: courtName });
+      await onSubmit({ name: name.trim(), phone: phone.trim(), court_name: courtName.trim() });
       setSuccess(true);
       setName('');
       setPhone('');
