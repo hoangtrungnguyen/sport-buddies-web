@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp, CalendarDays, UserPlus, BarChart2, MapPin } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -122,6 +122,7 @@ export default function OwnerSection() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: 0 }}
               className="inline-flex items-center gap-2 bg-success-bg text-primary px-4 py-2 rounded-full mb-6 font-bold text-sm border border-primary/10"
             >
               <CheckCircle2 size={16} className="fill-primary text-white" />
@@ -148,60 +149,21 @@ export default function OwnerSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Bell className="text-primary" />,
-                bg: "bg-success-bg",
-                title: "Nhận thông báo tức thì",
-                desc: "Mỗi khi có người đặt sân, bạn nhận ngay thông báo — không bỏ lỡ bất kỳ booking nào."
-              },
-              {
-                icon: <ThumbsUp className="text-primary" />,
-                bg: "bg-success-bg",
-                title: "Duyệt booking bằng 1 chạm",
-                desc: "Duyệt hoặc từ chối booking nhanh chóng. Số điện thoại khách hiện ngay sau khi bạn duyệt."
-              },
-              {
-                icon: <CalendarDays className="text-primary" />,
-                bg: "bg-success-bg",
-                title: "Lịch sân 7 ngày",
-                desc: "Xem tất cả slot trong tuần, khoá giờ bảo trì và tạo lịch cố định hàng tuần chỉ một lần."
-              },
-              {
-                icon: <UserPlus className="text-primary" />,
-                bg: "bg-success-bg",
-                title: "Thêm booking tại quầy",
-                desc: "Nhận booking cho khách walk-in trực tiếp tại sân mà không cần giấy tờ hay ghi chú thủ công."
-              },
-              {
-                icon: <BarChart2 className="text-primary" />,
-                bg: "bg-success-bg",
-                title: "Thống kê doanh thu",
-                desc: "Xem báo cáo doanh thu và giờ cao điểm theo tuần để tối ưu lịch hoạt động và giá sân."
-              },
-              {
-                icon: <MapPin className="text-primary" />,
-                bg: "bg-success-bg",
-                title: "Hiển thị trên bản đồ SpB",
-                desc: "Sân của bạn xuất hiện trên bản đồ SportBuddies cho hàng nghìn người chơi tại TP.HCM."
-              }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.07 }}
-                whileHover={{ y: -5 }}
-                className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
-              >
-                <div className={`w-14 h-14 ${item.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                <p className="text-neutral-500 leading-relaxed text-sm">{item.desc}</p>
-              </motion.div>
-            ))}
+            {/* grava-4ff8.1.7: instant booking notification card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0 }}
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
+            >
+              <div className="w-14 h-14 bg-success-bg rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Bell className="text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Nhận thông báo tức thì</h3>
+              <p className="text-neutral-500 leading-relaxed text-sm">Mỗi khi có người đặt sân, bạn nhận ngay thông báo — không bỏ lỡ bất kỳ booking nào.</p>
+            </motion.div>
           </div>
         </div>
       </section>
