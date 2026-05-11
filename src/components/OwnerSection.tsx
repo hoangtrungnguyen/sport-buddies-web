@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, BarChart3 } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, BarChart3, CalendarDays, BellRing } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
