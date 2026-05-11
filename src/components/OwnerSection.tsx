@@ -142,32 +142,49 @@ export default function OwnerSection() {
       </section>
 
       {/* Benefits */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-background" data-testid="benefits-section">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-black mb-4">Tính năng dành cho chủ sân</h2>
-            <p className="text-neutral-600 max-w-xl mx-auto">Mọi công cụ bạn cần để vận hành sân chuyên nghiệp — ngay trên điện thoại.</p>
+            <h2 className="text-3xl font-black mb-4">SportBuddies giúp bạn</h2>
+            <p className="text-neutral-600 max-w-xl mx-auto">Công cụ mạnh mẽ giúp chủ sân tối ưu vận hành và tăng doanh thu.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
+                icon: <CalendarDays className="text-primary" />,
+                iconTestId: "benefit-icon-calendar",
+                bg: "bg-primary-light",
+                title: "Quản lý lịch sân trực quan theo tuần",
+                desc: "Xem toàn bộ lịch đặt sân trong tuần chỉ với một cái nhìn — dễ dàng phát hiện giờ trống và sắp xếp lịch tối ưu.",
+              },
+              {
+                icon: <BellRing className="text-warning" />,
+                iconTestId: "benefit-icon-bell",
+                bg: "bg-warning-bg",
+                title: "Nhận thông báo đặt sân ngay lập tức",
+                desc: "Mỗi khi có khách đặt sân, bạn nhận thông báo tức thì — không bỏ lỡ bất kỳ booking nào.",
+              },
+              {
                 icon: <BarChart3 className="text-success" />,
+                iconTestId: "benefit-icon-chart",
                 bg: "bg-success-bg",
-                title: "Xem doanh thu và giờ cao điểm",
-                desc: "Theo dõi doanh thu theo ngày, tuần, tháng và xác định khung giờ cao điểm để tối ưu hoá lịch sân."
-              }
-            ].map((item, i) => (
+                title: "Theo dõi doanh thu theo thời gian thực",
+                desc: "Báo cáo doanh thu cập nhật liên tục giúp bạn nắm rõ hiệu quả kinh doanh mọi lúc.",
+              },
+            ].map((item) => (
               <motion.div
-                key={i}
+                key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -5 }}
                 className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
               >
-                <div className={`w-14 h-14 ${item.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                <div
+                  data-testid={item.iconTestId}
+                  className={`w-14 h-14 ${item.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
+                >
                   {item.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-4">{item.title}</h3>
