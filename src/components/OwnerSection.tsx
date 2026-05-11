@@ -44,7 +44,7 @@ export default function OwnerSection() {
               transition={{ delay: 0.2 }}
               className="text-lg text-neutral-600 max-w-xl mb-12 leading-relaxed"
             >
-              SportBuddies giúp chủ sân thể thao dễ dàng quản lý lịch đặt, tiếp cận hàng ngàn khách hàng mới mỗi ngày và tối đa hóa lợi nhuận mà không tốn công sức.
+              Đăng ký miễn phí — tụi mình mang khách đến sân bạn
             </motion.p>
             
             <div className="flex items-center gap-4">
