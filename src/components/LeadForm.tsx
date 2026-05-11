@@ -1,218 +1,126 @@
 /**
- * @license
- * SPDX-License-Identifier: Apache-2.0
+ * LeadForm — Contact / sign-up form for court owners.
+ *
+ * Collects name, phone number, and court name then delegates submission to the
+ * caller-supplied `onSubmit` handler.  The component manages its own field
+ * state and basic loading / error display; business logic (API call, UTM
+ * attribution) lives in the parent via the `onSubmit` prop.
  */
 
-import { useState, type FormEvent } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
-
-export type SportType = 'Bóng đá' | 'Cầu lông' | 'Pickleball' | 'Tennis' | 'Đa năng';
-
-export const SPORT_TYPES: SportType[] = [
-  'Bóng đá',
-  'Cầu lông',
-  'Pickleball',
-  'Tennis',
-  'Đa năng',
-];
-
-export const HCMC_DISTRICTS = [
-  'Quận 1',
-  'Quận 3',
-  'Quận 4',
-  'Quận 5',
-  'Quận 6',
-  'Quận 7',
-  'Quận 8',
-  'Quận 10',
-  'Quận 11',
-  'Quận 12',
-  'Bình Thạnh',
-  'Gò Vấp',
-  'Phú Nhuận',
-  'Tân Bình',
-  'Tân Phú',
-  'Bình Tân',
-  'Thủ Đức',
-  'Bình Chánh',
-  'Cần Giờ',
-  'Củ Chi',
-  'Hóc Môn',
-  'Nhà Bè',
-];
+import React, { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 
 export interface LeadFormData {
-  ownerName: string;
+  name: string;
   phone: string;
-  courtName: string;
-  sportTypes: SportType[];
-  district: string;
+  court_name: string;
 }
 
-interface LeadFormProps {
-  onSubmit?: (data: LeadFormData) => void;
+export interface LeadFormProps {
+  /** Called with validated form data when the user submits. */
+  onSubmit: (data: LeadFormData) => Promise<void>;
 }
 
 export default function LeadForm({ onSubmit }: LeadFormProps) {
-  const [ownerName, setOwnerName] = useState('');
+  const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [courtName, setCourtName] = useState('');
-  const [sportTypes, setSportTypes] = useState<SportType[]>([]);
-  const [district, setDistrict] = useState('');
-  const [sportTypeError, setSportTypeError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
-  const toggleSport = (sport: SportType) => {
-    setSportTypes(prev => {
-      const next = prev.includes(sport) ? prev.filter(s => s !== sport) : [...prev, sport];
-      if (next.length > 0) setSportTypeError(false);
-      return next;
-    });
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (sportTypes.length === 0) {
-      setSportTypeError(true);
-      return;
+    setError(null);
+    setLoading(true);
+
+    try {
+      await onSubmit({ name, phone, court_name: courtName });
+      setSuccess(true);
+      setName('');
+      setPhone('');
+      setCourtName('');
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : 'Đã có lỗi xảy ra. Vui lòng thử lại.'
+      );
+    } finally {
+      setLoading(false);
     }
-    onSubmit?.({ ownerName, phone, courtName, sportTypes, district });
   };
+
+  if (success) {
+    return (
+      <div className="text-center py-8">
+        <div className="text-4xl mb-4">🎉</div>
+        <h4 className="text-xl font-black mb-2">Đăng ký thành công!</h4>
+        <p className="text-neutral-500 text-sm">
+          Chúng tôi sẽ liên hệ với bạn trong vòng 24h.
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit} data-testid="lead-form">
-      {/* Owner Name */}
+    <form className="space-y-5" onSubmit={handleSubmit} noValidate>
       <div>
-        <label
-          htmlFor="lead-owner-name"
-          className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1"
-        >
+        <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">
           Họ và tên
         </label>
         <input
-          id="lead-owner-name"
           type="text"
-          value={ownerName}
-          onChange={e => setOwnerName(e.target.value)}
           placeholder="Họ và tên của bạn"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           required
-          className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+          disabled={loading}
+          className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300 disabled:opacity-50"
         />
       </div>
 
-      {/* Phone */}
       <div>
-        <label
-          htmlFor="lead-phone"
-          className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1"
-        >
+        <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">
           Số điện thoại
         </label>
         <input
-          id="lead-phone"
           type="tel"
-          value={phone}
-          onChange={e => setPhone(e.target.value)}
           placeholder="090 123 4567"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           required
-          className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+          disabled={loading}
+          className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300 disabled:opacity-50"
         />
       </div>
 
-      {/* Court Name */}
       <div>
-        <label
-          htmlFor="lead-court-name"
-          className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1"
-        >
+        <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">
           Tên sân thể thao
         </label>
         <input
-          id="lead-court-name"
           type="text"
-          value={courtName}
-          onChange={e => setCourtName(e.target.value)}
           placeholder="VD: Pickleball Arena Quận 7"
+          value={courtName}
+          onChange={(e) => setCourtName(e.target.value)}
           required
-          className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+          disabled={loading}
+          className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300 disabled:opacity-50"
         />
       </div>
 
-      {/* Sport Types multi-select */}
-      <div>
-        <span className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">
-          Môn thể thao
-        </span>
-        <div
-          className="flex flex-wrap gap-2"
-          role="group"
-          aria-label="Môn thể thao"
-          aria-describedby={sportTypeError ? 'sport-type-error' : undefined}
-        >
-          {SPORT_TYPES.map(sport => {
-            const selected = sportTypes.includes(sport);
-            return (
-              <button
-                key={sport}
-                type="button"
-                aria-pressed={selected}
-                onClick={() => toggleSport(sport)}
-                className={[
-                  'inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold border transition-all',
-                  selected
-                    ? 'bg-primary text-white border-primary shadow-sm'
-                    : 'bg-neutral-50 text-neutral-700 border-neutral-200 hover:border-primary hover:text-primary',
-                ].join(' ')}
-              >
-                {selected && <Check size={14} strokeWidth={3} />}
-                {sport}
-              </button>
-            );
-          })}
-        </div>
-        {sportTypeError && (
-          <p
-            id="sport-type-error"
-            role="alert"
-            className="mt-2 px-1 text-xs font-semibold text-red-500"
-          >
-            Vui lòng chọn ít nhất một môn thể thao.
-          </p>
-        )}
-      </div>
-
-      {/* District */}
-      <div>
-        <label
-          htmlFor="lead-district"
-          className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1"
-        >
-          Quận / Huyện (TP.HCM)
-        </label>
-        <select
-          id="lead-district"
-          value={district}
-          onChange={e => setDistrict(e.target.value)}
-          required
-          className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium text-neutral-700 appearance-none cursor-pointer"
-        >
-          <option value="" disabled>
-            Chọn quận / huyện
-          </option>
-          {HCMC_DISTRICTS.map(d => (
-            <option key={d} value={d}>
-              {d}
-            </option>
-          ))}
-        </select>
-      </div>
+      {error && (
+        <p className="text-sm text-red-500 font-medium text-center">{error}</p>
+      )}
 
       <button
         type="submit"
-        className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+        disabled={loading}
+        className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20 disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Đăng ký sân ngay
-        <ArrowRight size={20} />
+        {loading ? 'Đang gửi...' : 'Đăng ký sân ngay'}
+        {!loading && <ArrowRight size={20} />}
       </button>
+
       <p className="text-center text-[10px] text-neutral-400 font-medium">
         Cam kết bảo mật thông tin 100%.
       </p>
