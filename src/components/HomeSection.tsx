@@ -5,6 +5,7 @@
 
 import { motion } from 'motion/react';
 import { ArrowRight, Star, MapPin, Search, Bolt, ShieldCheck, Users, Map as MapIcon, Sliders, Clock, BellRing, Timer } from 'lucide-react';
+import StatsBar from './StatsBar';
 
 const CUSTOMER_APP_URL: string = import.meta.env.VITE_CUSTOMER_APP_URL ?? '#';
 
@@ -241,6 +242,9 @@ export default function HomeSection() {
           </div>
         </div>
       </section>
+
+      {/* Stats Bar — MKT-003: shows live court/booking counts (data from task 3.1) */}
+      <StatsBar courtCount={52} bookingCount={1840} />
 
       {/* How It Works — MKT-002 */}
       <section id="mkt-002" className="py-20 bg-white">
