@@ -4,160 +4,168 @@
  */
 
 import { motion } from 'motion/react';
-import SportCard, { type SportCardProps } from './SportCard';
+import SportCard, { SportCardProps } from './SportCard';
 
-/**
- * Sport data matching `sport_types` values in the SportBuddies DB.
- *
- * grava-8a6d.4.3: Cầu lông card — tagline "Sân trong nhà · Tiêu chuẩn thi đấu"
- * as specified in the task title (MKT-004 sports section).
- */
+// ---------------------------------------------------------------------------
+// Sport icons — inline SVGs keep the bundle light (no extra icon dep needed)
+// ---------------------------------------------------------------------------
+
+function FootballIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-success">
+      <circle cx="12" cy="12" r="10" />
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
+function BadmintonIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-warning">
+      <line x1="4" y1="20" x2="12" y2="12" />
+      <path d="M12 12 L18 4 M12 12 L20 10 M12 12 L18 18" />
+      <circle cx="20" cy="5" r="2.5" />
+    </svg>
+  );
+}
+
+function PickleballIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-primary">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 3 C8 7 8 17 12 21" />
+      <path d="M12 3 C16 7 16 17 12 21" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+    </svg>
+  );
+}
+
+function TennisIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-orange-500">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3.5 9 C6 8 8 10 8 12 C8 14 6 16 3.5 15" />
+      <path d="M20.5 9 C18 8 16 10 16 12 C16 14 18 16 20.5 15" />
+    </svg>
+  );
+}
+
+function MultiSportIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-tertiary">
+      <rect x="3" y="3" width="8" height="8" rx="1.5" />
+      <rect x="13" y="3" width="8" height="8" rx="1.5" />
+      <rect x="3" y="13" width="8" height="8" rx="1.5" />
+      <rect x="13" y="13" width="8" height="8" rx="1.5" />
+    </svg>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Sport data — matches `sport_types` values in DB
+// ---------------------------------------------------------------------------
+
 const SPORTS: SportCardProps[] = [
   {
-    sportKey: 'bong-da',
+    sportKey: 'football',
     name: 'Bóng đá',
     tagline: '5vs5, 7vs7 · Sân cỏ nhân tạo',
-    description:
-      'Môn thể thao vua với hàng triệu người chơi tại Việt Nam. Tìm sân bóng đá 5 người, 7 người cỏ nhân tạo và đối tác dễ dàng qua SportBuddies.',
+    icon: <FootballIcon />,
+    iconBg: 'bg-success-bg',
     details: [
-      { label: 'Hình thức', value: '5vs5, 7vs7' },
-      { label: 'Loại sân', value: 'Cỏ nhân tạo' },
-      { label: 'Thời gian', value: '60 – 90 phút' },
-      { label: 'Phong cách', value: 'Phong trào' },
+      { label: 'Hình thức', value: '5vs5 · 7vs7' },
+      { label: 'Mặt sân', value: 'Cỏ nhân tạo' },
     ],
-    icon: '⚽',
-    accentClass: 'bg-success',
-    iconBgClass: 'bg-success-bg',
   },
   {
-    sportKey: 'cau-long',
+    sportKey: 'badminton',
     name: 'Cầu lông',
-    tagline: 'Sân trong nhà · Tiêu chuẩn thi đấu',
-    description:
-      'Môn thể thao trong nhà phổ biến nhất Việt Nam. Sân đạt tiêu chuẩn thi đấu quốc tế, ánh sáng chuẩn BWF, mặt sàn chuyên dụng. Tìm sân cầu lông gần bạn ngay.',
+    tagline: 'Đơn · Đôi · Sân trong nhà',
+    icon: <BadmintonIcon />,
+    iconBg: 'bg-warning-bg',
     details: [
-      { label: 'Loại sân', value: 'Trong nhà' },
-      { label: 'Tiêu chuẩn', value: 'Thi đấu' },
-      { label: 'Số người', value: '1v1 – 2v2' },
-      { label: 'Hình thức', value: 'Đơn / Đôi' },
+      { label: 'Hình thức', value: 'Đơn · Đôi' },
+      { label: 'Mặt sân', value: 'Trong nhà' },
     ],
-    icon: '🏸',
-    accentClass: 'bg-warning',
-    iconBgClass: 'bg-warning-bg',
+
   },
   {
     sportKey: 'pickleball',
     name: 'Pickleball',
-    tagline: 'Xu hướng số 1 TPHCM',
-    description:
-      'Hiện tượng thể thao đang gây sốt toàn cầu. Dễ tiếp cận với người mới, đủ thách thức cho người chơi lâu năm. Cộng đồng Pickleball TPHCM đang bùng nổ.',
+    tagline: 'Đơn · Đôi · Sân tiêu chuẩn',
+    icon: <PickleballIcon />,
+    iconBg: 'bg-primary-light',
     details: [
-      { label: 'Số người', value: '2v2' },
-      { label: 'Loại sân', value: 'Ngoài trời / Nhà' },
-      { label: 'Thời gian', value: '30 – 60 phút' },
-      { label: 'Hình thức', value: 'Đôi nam nữ' },
+      { label: 'Hình thức', value: 'Đơn · Đôi' },
+      { label: 'Mặt sân', value: 'Tiêu chuẩn' },
     ],
-    icon: '🏓',
-    accentClass: 'bg-primary',
-    iconBgClass: 'bg-primary-light',
   },
   {
     sportKey: 'tennis',
     name: 'Tennis',
-    tagline: 'Đẳng cấp & phong cách',
-    description:
-      'Môn thể thao quý phái với lịch sử lâu đời. Tại TPHCM, hàng trăm sân tennis chất lượng cao đang chờ bạn. Đặt sân và tìm đối tác ngay trên SportBuddies.',
+    tagline: 'Đơn · Đôi · Sân đất nện & cứng',
+    icon: <TennisIcon />,
+    iconBg: 'bg-orange-50',
     details: [
-      { label: 'Số người', value: '1v1 – 2v2' },
-      { label: 'Loại sân', value: 'Hard / Clay' },
-      { label: 'Thời gian', value: '60 – 90 phút' },
-      { label: 'Hình thức', value: 'Đơn / Đôi' },
+      { label: 'Hình thức', value: 'Đơn · Đôi' },
+      { label: 'Mặt sân', value: 'Đất nện · Cứng' },
     ],
-    icon: '🎾',
-    accentClass: 'bg-secondary-container',
-    iconBgClass: 'bg-orange-50',
   },
   {
-    sportKey: 'bong-ro',
-    name: 'Bóng rổ',
-    tagline: 'Đồng đội & bùng nổ',
-    description:
-      'Môn thể thao đồng đội đang phát triển mạnh tại các đô thị lớn. Tìm sân bóng rổ, lập đội và thách đấu cộng đồng qua SportBuddies.',
+    sportKey: 'multi',
+    name: 'Đa năng',
+    tagline: 'Sân linh hoạt · Nhiều môn trên cùng một sân',
+    icon: <MultiSportIcon />,
+    iconBg: 'bg-pink-50',
     details: [
-      { label: 'Số người', value: '3v3 – 5v5' },
-      { label: 'Loại sân', value: 'Ngoài trời / Nhà' },
-      { label: 'Thời gian', value: '60 – 90 phút' },
-      { label: 'Hình thức', value: 'Phong trào' },
+      { label: 'Loại sân', value: 'Linh hoạt' },
+      { label: 'Ưu điểm', value: 'Đa môn' },
     ],
-    icon: '🏀',
-    accentClass: 'bg-tertiary-container',
-    iconBgClass: 'bg-pink-50',
   },
 ];
 
-/**
- * SportsSection — MKT-004 "Sports Section".
- *
- * Displays a heading + responsive 5-card grid of sport types supported by
- * the SportBuddies platform. Each card uses the SportCard component which
- * exposes a stable content interface so sport-specific copy can be updated
- * independently per task.
- */
+// ---------------------------------------------------------------------------
+// Section
+// ---------------------------------------------------------------------------
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+};
+
 export default function SportsSection() {
   return (
-    <section className="py-20 bg-white" aria-labelledby="sports-section-heading">
+    <section className="py-20 bg-white">
       <div className="max-w-[1200px] mx-auto px-6">
-        {/* Section header */}
+        {/* Heading */}
         <div className="text-center mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 bg-primary-light text-primary px-4 py-2 rounded-full mb-5 font-semibold text-sm border border-primary/10"
-          >
-            5 môn thể thao
-          </motion.div>
-
-          <motion.h2
-            id="sports-section-heading"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.05 }}
-            className="text-3xl md:text-4xl font-black mb-4"
-          >
-            Môn thể thao bạn yêu thích
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-neutral-600 max-w-xl mx-auto"
-          >
-            SportBuddies hỗ trợ đặt sân và tìm đối tác cho 5 môn thể thao phổ biến nhất tại TPHCM.
-          </motion.p>
+          <h2 className="text-3xl font-black mb-4">Môn thể thao hỗ trợ</h2>
+          <p className="text-neutral-600 max-w-xl mx-auto">
+            SportBuddies phục vụ nhiều bộ môn — tìm sân phù hợp với môn bạn yêu thích.
+          </p>
         </div>
 
-        {/* 5-card responsive grid */}
-        <div
+        {/* Cards grid */}
+        <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
-          data-testid="sports-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
-          {SPORTS.map((sport, index) => (
-            <motion.div
-              key={sport.sportKey}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.07 }}
-            >
+          {SPORTS.map((sport) => (
+            <motion.div key={sport.sportKey} variants={cardVariants}>
               <SportCard {...sport} />
             </motion.div>
           ))}
-
-        </div>
+        </motion.div>
       </div>
     </section>
   );
