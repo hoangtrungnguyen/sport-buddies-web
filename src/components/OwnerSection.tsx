@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp, CalendarDays } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp, CalendarDays, UserPlus } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -221,6 +221,22 @@ export default function OwnerSection() {
               </div>
               <h3 className="text-xl font-bold mb-4">Lịch sân 7 ngày</h3>
               <p className="text-neutral-500 leading-relaxed text-sm">Xem toàn bộ slot trong tuần, khoá khung giờ bận và tạo lịch cố định hàng tuần — quản lý sân chủ động từ một màn hình.</p>
+            </motion.div>
+
+            {/* grava-4ff8.1.10: counter booking for walk-in customers */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 }}
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
+            >
+              <div className="w-14 h-14 bg-error-container/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <UserPlus className="text-error" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Booking tại quầy</h3>
+              <p className="text-neutral-500 leading-relaxed text-sm">Tạo booking ngay tại quầy cho khách walk-in — nhập tên, số điện thoại và chọn khung giờ chỉ trong vài giây.</p>
             </motion.div>
           </div>
         </div>
