@@ -59,15 +59,22 @@ export default function LeadForm({ onSubmit }: LeadFormProps) {
   const [courtName, setCourtName] = useState('');
   const [sportTypes, setSportTypes] = useState<SportType[]>([]);
   const [district, setDistrict] = useState('');
+  const [sportTypeError, setSportTypeError] = useState(false);
 
   const toggleSport = (sport: SportType) => {
-    setSportTypes(prev =>
-      prev.includes(sport) ? prev.filter(s => s !== sport) : [...prev, sport]
-    );
+    setSportTypes(prev => {
+      const next = prev.includes(sport) ? prev.filter(s => s !== sport) : [...prev, sport];
+      if (next.length > 0) setSportTypeError(false);
+      return next;
+    });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (sportTypes.length === 0) {
+      setSportTypeError(true);
+      return;
+    }
     onSubmit?.({ ownerName, phone, courtName, sportTypes, district });
   };
 
@@ -135,7 +142,12 @@ export default function LeadForm({ onSubmit }: LeadFormProps) {
         <span className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">
           Môn thể thao
         </span>
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Môn thể thao">
+        <div
+          className="flex flex-wrap gap-2"
+          role="group"
+          aria-label="Môn thể thao"
+          aria-describedby={sportTypeError ? 'sport-type-error' : undefined}
+        >
           {SPORT_TYPES.map(sport => {
             const selected = sportTypes.includes(sport);
             return (
@@ -157,6 +169,15 @@ export default function LeadForm({ onSubmit }: LeadFormProps) {
             );
           })}
         </div>
+        {sportTypeError && (
+          <p
+            id="sport-type-error"
+            role="alert"
+            className="mt-2 px-1 text-xs font-semibold text-red-500"
+          >
+            Vui lòng chọn ít nhất một môn thể thao.
+          </p>
+        )}
       </div>
 
       {/* District */}
