@@ -4,134 +4,135 @@
  */
 
 import { motion } from 'motion/react';
-import SportCard, { SportCardProps } from './SportCard';
+import { Search } from 'lucide-react';
+import SportCard from './SportCard';
 
-// ---------------------------------------------------------------------------
-// Sport icons — inline SVGs keep the bundle light (no extra icon dep needed)
-// ---------------------------------------------------------------------------
-
-function FootballIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-success">
-      <circle cx="12" cy="12" r="10" />
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  );
-}
-
-function BadmintonIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-warning">
-      <line x1="4" y1="20" x2="12" y2="12" />
-      <path d="M12 12 L18 4 M12 12 L20 10 M12 12 L18 18" />
-      <circle cx="20" cy="5" r="2.5" />
-    </svg>
-  );
-}
-
-function PickleballIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-primary">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 3 C8 7 8 17 12 21" />
-      <path d="M12 3 C16 7 16 17 12 21" />
-      <line x1="3" y1="12" x2="21" y2="12" />
-    </svg>
-  );
-}
-
-function TennisIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-orange-500">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M3.5 9 C6 8 8 10 8 12 C8 14 6 16 3.5 15" />
-      <path d="M20.5 9 C18 8 16 10 16 12 C16 14 18 16 20.5 15" />
-    </svg>
-  );
-}
-
-function MultiSportIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-tertiary">
-      <rect x="3" y="3" width="8" height="8" rx="1.5" />
-      <rect x="13" y="3" width="8" height="8" rx="1.5" />
-      <rect x="3" y="13" width="8" height="8" rx="1.5" />
-      <rect x="13" y="13" width="8" height="8" rx="1.5" />
-    </svg>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Sport data — matches `sport_types` values in DB
-// ---------------------------------------------------------------------------
-
-const SPORTS: SportCardProps[] = [
+/**
+ * Sport data matching `sport_types` values in the SportBuddies DB.
+ * All 5 supported sports with their display names and taglines.
+ */
+const sports = [
   {
-    sportKey: 'football',
     name: 'Bóng đá',
     tagline: '5vs5, 7vs7 · Sân cỏ nhân tạo',
-    icon: <FootballIcon />,
-    iconBg: 'bg-success-bg',
-    details: [
-      { label: 'Hình thức', value: '5vs5 · 7vs7' },
-      { label: 'Mặt sân', value: 'Cỏ nhân tạo' },
-    ],
+    iconBgClass: 'bg-success-bg',
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="w-7 h-7 text-success"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 2a10 10 0 0 0-6.2 17.9L12 12l6.2 7.9A10 10 0 0 0 12 2z" />
+        <path d="M12 12 5.8 19.9M12 12l6.2 7.9" />
+        <path d="M4.3 7h15.4M12 2v4" />
+      </svg>
+    ),
   },
   {
-    sportKey: 'badminton',
     name: 'Cầu lông',
-    tagline: 'Đơn · Đôi · Sân trong nhà',
-    icon: <BadmintonIcon />,
-    iconBg: 'bg-warning-bg',
-    details: [
-      { label: 'Hình thức', value: 'Đơn · Đôi' },
-      { label: 'Mặt sân', value: 'Trong nhà' },
-    ],
-
+    tagline: 'Sân trong nhà · Tiêu chuẩn thi đấu',
+    iconBgClass: 'bg-warning-bg',
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="w-7 h-7 text-warning"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="8" cy="16" r="3" />
+        <line x1="10.5" y1="13.5" x2="20" y2="4" />
+        <path d="M20 4l-3 1 1-3z" />
+        <path d="M15 5l-2 3M17 8l-3 1" />
+      </svg>
+    ),
   },
   {
-    sportKey: 'pickleball',
     name: 'Pickleball',
-    tagline: 'Đơn · Đôi · Sân tiêu chuẩn',
-    icon: <PickleballIcon />,
-    iconBg: 'bg-primary-light',
-    details: [
-      { label: 'Hình thức', value: 'Đơn · Đôi' },
-      { label: 'Mặt sân', value: 'Tiêu chuẩn' },
-    ],
+    tagline: 'Môn mới tại Việt Nam · Dễ học, dễ chơi',
+    iconBgClass: 'bg-primary-light',
+    badge: 'Đang hot',
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="w-7 h-7 text-primary"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="12" cy="12" r="9" />
+        <line x1="12" y1="3" x2="12" y2="7" />
+        <line x1="12" y1="17" x2="12" y2="21" />
+        <line x1="3" y1="12" x2="7" y2="12" />
+        <line x1="17" y1="12" x2="21" y2="12" />
+      </svg>
+    ),
   },
   {
-    sportKey: 'tennis',
     name: 'Tennis',
-    tagline: 'Đơn · Đôi · Sân đất nện & cứng',
-    icon: <TennisIcon />,
-    iconBg: 'bg-orange-50',
-    details: [
-      { label: 'Hình thức', value: 'Đơn · Đôi' },
-      { label: 'Mặt sân', value: 'Đất nện · Cứng' },
-    ],
+    tagline: 'Sân đơn và đôi · Trong nhà và ngoài trời',
+    iconBgClass: 'bg-tennis-bg',
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="w-7 h-7 text-secondary"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M18 12c0-2.76-2.24-5-5-5" />
+        <path d="M6 12c0 2.76 2.24 5 5 5" />
+        <path d="M12 2c-1.38 2.5-1.38 7.5 0 10s1.38 7.5 0 10" />
+      </svg>
+    ),
   },
   {
-    sportKey: 'multi',
     name: 'Đa năng',
     tagline: 'Sân linh hoạt · Nhiều môn trên cùng một sân',
-    icon: <MultiSportIcon />,
-    iconBg: 'bg-pink-50',
-    details: [
-      { label: 'Loại sân', value: 'Linh hoạt' },
-      { label: 'Ưu điểm', value: 'Đa môn' },
-    ],
+    iconBgClass: 'bg-multisport-bg',
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        className="w-7 h-7 text-blue-500"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+      </svg>
+    ),
   },
 ];
-
-// ---------------------------------------------------------------------------
-// Section
-// ---------------------------------------------------------------------------
 
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.1 },
+    transition: {
+      staggerChildren: 0.1,
+    },
   },
 };
 
@@ -140,32 +141,59 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
 };
 
+/**
+ * SportsSection — MKT-004 "Sports Section".
+ *
+ * Displays a heading + responsive 5-card grid of sport types supported by
+ * the SportBuddies platform. The Tennis card tagline is
+ * "Sân đơn và đôi · Trong nhà và ngoài trời".
+ */
 export default function SportsSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-background" aria-labelledby="sports-section-heading">
       <div className="max-w-[1200px] mx-auto px-6">
-        {/* Heading */}
+        {/* Section heading */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl font-black mb-4">Môn thể thao hỗ trợ</h2>
+          <h2 id="sports-section-heading" className="text-3xl font-black mb-3">
+            Các môn thể thao được hỗ trợ
+          </h2>
           <p className="text-neutral-600 max-w-xl mx-auto">
-            SportBuddies phục vụ nhiều bộ môn — tìm sân phù hợp với môn bạn yêu thích.
+            Từ pickleball đang bùng nổ đến bóng đá truyền thống — SportBuddies có sân cho bạn.
           </p>
         </div>
 
-        {/* Cards grid */}
+        {/* 5-card responsive grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, margin: '-60px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          data-testid="sports-grid"
         >
-          {SPORTS.map((sport) => (
-            <motion.div key={sport.sportKey} variants={cardVariants}>
-              <SportCard {...sport} />
+          {sports.map((sport) => (
+            <motion.div key={sport.name} variants={cardVariants}>
+              <SportCard
+                name={sport.name}
+                tagline={sport.tagline}
+                iconBgClass={sport.iconBgClass}
+                badge={sport.badge}
+                icon={sport.icon}
+              />
             </motion.div>
           ))}
         </motion.div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <button
+            type="button"
+            className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95"
+          >
+            <Search size={20} aria-hidden="true" />
+            Mở app ngay
+          </button>
+        </div>
       </div>
     </section>
   );

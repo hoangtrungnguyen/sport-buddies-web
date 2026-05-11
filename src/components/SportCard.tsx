@@ -4,53 +4,56 @@
  */
 
 import { motion } from 'motion/react';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export interface SportCardProps {
-  /** DB sport_types value — used by callers as React key and future filter ID */
-  sportKey: string;
+  /** Display name of the sport */
   name: string;
+  /** Short tagline shown below the name (e.g. "Sân đơn và đôi · Trong nhà và ngoài trời") */
   tagline: string;
+  /** Icon element for the sport */
   icon: ReactNode;
-  iconBg: string;
-  details: Array<{ label: string; value: string }>;
+  /** Tailwind background colour class for the icon bubble */
+  iconBgClass: string;
+  /** Optional badge label (e.g. "Đang hot") */
+  badge?: string;
 }
 
 /**
- * Displays one sport type in the MKT-004 Sports section.
- * `sportKey` is intentionally not destructured in the render body —
- * it is a caller-facing identifier (React key, future filter) only.
+ * SportCard — informational card for one sport type in the MKT-004 Sports Section.
+ *
+ * Displays sport name, tagline and icon. An optional badge can highlight
+ * trending or featured sports. Content is passed by the caller so that
+ * each sport task (4.2–4.6) can supply its own copy without touching
+ * the card structure.
  */
-export default function SportCard({ name, tagline, icon, iconBg, details }: SportCardProps) {
-
+export default function SportCard({ name, tagline, icon, iconBgClass, badge }: SportCardProps) {
   return (
     <motion.div
-      whileHover={{ y: -6 }}
+      whileHover={{ y: -6, scale: 1.02 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="bg-white rounded-3xl p-8 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-6"
+      className="relative bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer group overflow-hidden"
     >
+      {/* Decorative background circle */}
+      <div className="absolute -right-6 -top-6 w-28 h-28 bg-primary-light/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+      {/* Badge */}
+      {badge && (
+        <span className="absolute top-4 right-4 bg-secondary-container text-white text-[10px] font-black px-2.5 py-1 rounded-full tracking-wider uppercase z-10">
+          {badge}
+        </span>
+      )}
+
       {/* Icon */}
-      <div className={`w-14 h-14 ${iconBg} rounded-2xl flex items-center justify-center shrink-0`}>
+      <div
+        className={`w-14 h-14 ${iconBgClass} rounded-xl flex items-center justify-center mb-5 relative z-10`}
+      >
         {icon}
       </div>
 
-      {/* Name + tagline */}
-      <div>
-        <h3 className="text-xl font-black mb-1">{name}</h3>
-        <p className="text-sm text-neutral-600 leading-relaxed">{tagline}</p>
-      </div>
-
-      {/* Detail rows */}
-      {details.length > 0 && (
-        <dl className="space-y-2">
-          {details.map(({ label, value }, idx) => (
-            <div key={`${name}-${idx}`} className="flex items-center justify-between text-sm">
-              <dt className="text-neutral-500">{label}</dt>
-              <dd className="font-semibold text-neutral-800">{value}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
+      {/* Text */}
+      <h3 className="text-lg font-bold mb-1.5 relative z-10">{name}</h3>
+      <p className="text-sm text-neutral-600 leading-relaxed relative z-10">{tagline}</p>
     </motion.div>
   );
 }
