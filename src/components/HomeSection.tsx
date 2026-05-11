@@ -243,7 +243,7 @@ export default function HomeSection() {
         </div>
       </section>
 
-      {/* Stats Bar — MKT-003: shows live court/booking counts (data from task 3.1) */}
+      {/* Stats Bar — MKT-003: positioned between hero and how-it-works */}
       <StatsBar courtCount={52} bookingCount={1840} />
 
       {/* How It Works — MKT-002 */}
