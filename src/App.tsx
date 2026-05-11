@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import HomeSection from './components/HomeSection';
 import OwnerSection from './components/OwnerSection';
 import AppLandingSection from './components/AppLandingSection';
+import AgentSection from './components/AgentSection';
 
 const pathToSection: Record<string, string> = {
   '/': 'home',
@@ -49,6 +50,8 @@ export default function App() {
         return <OwnerSection />;
       case 'about':
         return <AppLandingSection />;
+      case 'agent':
+        return <AgentSection />;
       default:
         return <HomeSection />;
     }

@@ -18,6 +18,7 @@ export default function Navbar({ currentSection, setSection }: NavbarProps) {
   const navLinks = [
     { name: 'Tìm sân', id: 'home' },
     { name: 'Chủ sân?', id: 'owner' },
+    { name: 'Đại lý', id: 'agent' },
     { name: 'Về chúng tôi', id: 'about' },
   ];
 
