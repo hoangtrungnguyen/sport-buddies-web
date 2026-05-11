@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, CalendarDays, BellRing, BarChart3 } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -118,14 +118,14 @@ export default function OwnerSection() {
             <h2 className="text-3xl font-black mb-4">Bạn đang gặp khó khăn gì?</h2>
             <p className="text-neutral-600 max-w-xl mx-auto">Vận hành sân bãi thủ công tốn nhiều thời gian và dễ dẫn đến thất thoát.</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { icon: <PhoneOff className="text-error" />, bg: "bg-error-container/30", title: "Bỏ lỡ booking vì điện thoại bận", desc: "Khách gọi đặt sân nhưng điện thoại bận, không ai nghe — booking tuột khỏi tay." },
               { icon: <Hourglass className="text-warning" />, bg: "bg-warning-bg", title: "Giờ trống lãng phí", desc: "Nhiều khung giờ (sáng, trưa) vắng khách trong khi vẫn phải trả chi phí." },
               { icon: <TrendingDown className="text-neutral-600" />, bg: "bg-neutral-100", title: "Khó tiếp cận khách mới", desc: "Phụ thuộc vào khách quen, không có kênh quảng bá hiệu quả." }
             ].map((item, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 whileHover={{ y: -5 }}
                 className="bg-neutral-50 p-8 rounded-3xl border border-neutral-100 group transition-all"
@@ -135,6 +135,54 @@ export default function OwnerSection() {
                 </div>
                 <h3 className="text-xl font-bold mb-4">{item.title}</h3>
                 <p className="text-neutral-500 leading-relaxed text-sm">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="py-24 bg-background">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-black mb-4">SportBuddies mang lại gì cho bạn?</h2>
+            <p className="text-neutral-600 max-w-xl mx-auto">Công cụ quản lý sân chuyên nghiệp — đúng những tính năng chủ sân thực sự cần.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <CalendarDays size={28} className="text-primary" />,
+                bg: "bg-success-bg",
+                title: "Quản lý lịch sân",
+                desc: "Xem và điều phối toàn bộ lịch đặt sân trên một bảng điều khiển duy nhất, tránh trùng lịch và sai sót."
+              },
+              {
+                icon: <BellRing size={28} className="text-primary" />,
+                bg: "bg-success-bg",
+                title: "Nhận đặt sân tự động",
+                desc: "Khách đặt sân 24/7 trực tiếp qua ứng dụng — không cần nghe điện thoại, không lo bỏ lỡ đơn."
+              },
+              {
+                icon: <BarChart3 size={28} className="text-primary" />,
+                bg: "bg-success-bg",
+                title: "Thống kê doanh thu",
+                desc: "Báo cáo doanh thu theo ngày, tuần, tháng giúp bạn nắm rõ hiệu suất và tối ưu giá thuê sân."
+              }
+            ].map((benefit, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
+              >
+                <div className={`w-14 h-14 ${benefit.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  {benefit.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
+                <p className="text-neutral-500 leading-relaxed text-sm">{benefit.desc}</p>
               </motion.div>
             ))}
           </div>
