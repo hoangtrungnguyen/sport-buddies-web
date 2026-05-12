@@ -42,8 +42,11 @@ export default function Footer() {
           <div className="text-xl font-bold text-neutral-900 mb-4 font-display">
             SportBuddies
           </div>
+          <p className="text-primary font-semibold text-sm mb-2">
+            Đặt sân thể thao tại TP.HCM
+          </p>
           <p className="text-neutral-500 text-sm">
-            © 2024 SportBuddies. Nền tảng đặt sân thể thao hàng đầu tại Việt Nam.
+            © 2026 SportBuddies. All rights reserved.
           </p>
         </div>
 
