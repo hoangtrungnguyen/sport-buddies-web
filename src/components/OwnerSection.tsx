@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -17,11 +17,11 @@ export default function OwnerSection() {
     <>
       <section className="relative pt-32 pb-24 overflow-hidden bg-background">
         <div className="absolute top-0 right-0 -mr-64 -mt-32 w-[600px] h-[600px] bg-primary-light rounded-full blur-[120px] opacity-40 pointer-events-none"></div>
-        
+
         <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
           {/* Hero Content */}
           <div className="lg:col-span-7">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className="inline-flex items-center gap-2 bg-success-bg text-primary px-4 py-2 rounded-full mb-8 font-bold text-sm border border-primary/10 shadow-sm"
@@ -29,7 +29,7 @@ export default function OwnerSection() {
               <CheckCircle2 size={16} className="fill-primary text-white" />
               Giải pháp tối ưu doanh thu
             </motion.div>
-            
+
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -37,8 +37,8 @@ export default function OwnerSection() {
             >
               Bạn là chủ sân?
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
@@ -46,14 +46,14 @@ export default function OwnerSection() {
             >
               Đăng ký miễn phí — tụi mình mang khách đến sân bạn
             </motion.p>
-            
+
             <div className="flex items-center gap-4">
               <div className="flex -space-x-3">
                 {avatars.map((url, i) => (
-                  <img 
-                    key={i} 
-                    src={url} 
-                    alt="Owner" 
+                  <img
+                    key={i}
+                    src={url}
+                    alt="Owner"
                     className="w-12 h-12 rounded-full border-4 border-white object-cover shadow-sm bg-neutral-100"
                   />
                 ))}
@@ -64,22 +64,49 @@ export default function OwnerSection() {
             </div>
           </div>
 
-          {/* CTA Card */}
+          {/* Form Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="lg:col-span-5 bg-white rounded-3xl shadow-2xl p-8 border border-neutral-100"
           >
             <h3 className="text-2xl font-black mb-2">Bắt đầu ngay hôm nay</h3>
-            <p className="text-neutral-500 text-sm mb-8">Miễn phí 3 tháng đầu — không cần thẻ tín dụng.</p>
+            <p className="text-neutral-500 text-sm mb-8">Điền thông tin để nhận tư vấn miễn phí trong 24h.</p>
 
-            <a
-              href="/cho-chu-san"
-              className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
-            >
-              Đăng ký sân ngay
-              <ArrowRight size={20} />
-            </a>
+            <form className="space-y-5">
+              <div>
+                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Họ và tên</label>
+                <input
+                  type="text"
+                  placeholder="Họ và tên của bạn"
+                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Số điện thoại</label>
+                <input
+                  type="tel"
+                  placeholder="090 123 4567"
+                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Tên sân thể thao</label>
+                <input
+                  type="text"
+                  placeholder="VD: Pickleball Arena Quận 7"
+                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+              >
+                Đăng ký sân ngay
+                <ArrowRight size={20} />
+              </button>
+              <p className="text-center text-[10px] text-neutral-400 font-medium">Cam kết bảo mật thông tin 100%.</p>
+            </form>
           </motion.div>
         </div>
       </section>
@@ -122,11 +149,10 @@ export default function OwnerSection() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0 }}
               className="inline-flex items-center gap-2 bg-success-bg text-primary px-4 py-2 rounded-full mb-6 font-bold text-sm border border-primary/10"
             >
               <CheckCircle2 size={16} className="fill-primary text-white" />
-              Dashboard thực tế
+              Tính năng nổi bật
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 10 }}
@@ -163,6 +189,22 @@ export default function OwnerSection() {
               </div>
               <h3 className="text-xl font-bold mb-4">Nhận thông báo tức thì</h3>
               <p className="text-neutral-500 leading-relaxed text-sm">Mỗi khi có người đặt sân, bạn nhận ngay thông báo — không bỏ lỡ bất kỳ booking nào.</p>
+            </motion.div>
+
+            {/* grava-4ff8.1.8: approve/reject booking with phone reveal card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.05 }}
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
+            >
+              <div className="w-14 h-14 bg-primary-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <ThumbsUp className="text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Duyệt booking bằng 1 chạm</h3>
+              <p className="text-neutral-500 leading-relaxed text-sm">Duyệt hoặc từ chối lịch đặt chỉ với một cú chạm. Sau khi duyệt, số điện thoại khách hiện ra để bạn liên hệ ngay.</p>
             </motion.div>
           </div>
         </div>
