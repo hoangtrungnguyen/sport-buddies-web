@@ -3,10 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
-import LeadForm, { LeadFormData } from './LeadForm';
-import { submitLead } from '../lib/submitLead';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
+import { isValidVietnamesePhone } from '../utils/validation';
 
 export default function OwnerSection() {
   const avatars = [
@@ -15,9 +15,33 @@ export default function OwnerSection() {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAGix6TXOS_EkhOfiOn3ZFz7kbKUQ29l3pTZbdLtOW3h9JAGR5hgtpBWbIh5uOt2-vbecIYHTdS_tFiEfpGc2E1Rac2nC54Idpf2vo8X2dIb6znuQzU92ri9R4dQ5i0dyz0FQ9j05EY27c8vjGbcRFISvaM1DvfI2T3AvHgNu_1H-ioXCEDryB5kgz34Ore6MxHoyqixLdN2gyPf6bE9Iu9ea5-Q2e-o6imvpGKCO2RaFCWm2rCyIKHbG9JwGy3lGe0oAXDwxjT2nyd"
   ];
 
-  const handleLeadSubmit = async (data: LeadFormData): Promise<void> => {
-    await submitLead(data);
-  };
+  const [phone, setPhone] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+
+  function handlePhoneChange(e: ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    setPhone(value);
+    if (value.length === 0) {
+      setPhoneError('');
+    } else if (!isValidVietnamesePhone(value)) {
+      setPhoneError('Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số bắt đầu bằng 0.');
+    } else {
+      setPhoneError('');
+    }
+  }
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (phone.length === 0) {
+      setPhoneError('Vui lòng nhập số điện thoại.');
+      return;
+    }
+    if (!isValidVietnamesePhone(phone)) {
+      setPhoneError('Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số bắt đầu bằng 0.');
+      return;
+    }
+    // TODO: submit form
+  }
 
   return (
     <>
@@ -79,7 +103,57 @@ export default function OwnerSection() {
             <h3 className="text-2xl font-black mb-2">Bắt đầu ngay hôm nay</h3>
             <p className="text-neutral-500 text-sm mb-8">Điền thông tin để nhận tư vấn miễn phí trong 24h.</p>
 
-            <LeadForm onSubmit={handleLeadSubmit} />
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              <div>
+                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Họ và tên</label>
+                <input
+                  type="text"
+                  placeholder="Họ và tên của bạn"
+                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Số điện thoại</label>
+                <input
+                  type="tel"
+                  placeholder="090 123 4567"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  aria-describedby={phoneError ? 'phone-error' : undefined}
+                  aria-invalid={phoneError ? true : undefined}
+                  className={`w-full h-14 rounded-2xl px-5 border bg-neutral-50 focus:outline-none focus:ring-1 transition-all font-medium placeholder-neutral-300 ${
+                    phoneError
+                      ? 'border-red-400 focus:border-red-400 focus:ring-red-400'
+                      : 'border-neutral-200 focus:border-primary focus:ring-primary'
+                  }`}
+                />
+                {phoneError && (
+                  <p
+                    id="phone-error"
+                    role="alert"
+                    className="mt-1.5 px-1 text-xs text-red-500 font-medium"
+                  >
+                    {phoneError}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Tên sân thể thao</label>
+                <input
+                  type="text"
+                  placeholder="VD: Pickleball Arena Quận 7"
+                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+              >
+                Đăng ký sân ngay
+                <ArrowRight size={20} />
+              </button>
+              <p className="text-center text-[10px] text-neutral-400 font-medium">Cam kết bảo mật thông tin 100%.</p>
+            </form>
           </motion.div>
         </div>
       </section>
