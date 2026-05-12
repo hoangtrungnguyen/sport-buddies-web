@@ -48,6 +48,16 @@ export default function Footer() {
         </div>
 
         <div>
+          <h4 className="font-bold text-neutral-900 mb-4 uppercase tracking-wider text-xs">Môn thể thao</h4>
+          <ul className="space-y-3 text-sm">
+            <li><a href="/bong-da" title="Sân Bóng đá tại TP.HCM" aria-label="Xem sân Bóng đá tại TP.HCM" className="text-neutral-500 hover:text-primary transition-colors">Bóng đá</a></li>
+            <li><a href="/cau-long" title="Sân Cầu lông tại TP.HCM" aria-label="Xem sân Cầu lông tại TP.HCM" className="text-neutral-500 hover:text-primary transition-colors">Cầu lông</a></li>
+            <li><a href="/pickleball" title="Sân Pickleball tại TP.HCM" aria-label="Xem sân Pickleball tại TP.HCM" className="text-neutral-500 hover:text-primary transition-colors">Pickleball</a></li>
+            <li><a href="/tennis" title="Sân Tennis tại TP.HCM" aria-label="Xem sân Tennis tại TP.HCM" className="text-neutral-500 hover:text-primary transition-colors">Tennis</a></li>
+          </ul>
+        </div>
+
+        <div>
           <h4 className="font-bold text-neutral-900 mb-4 uppercase tracking-wider text-xs">Pháp lý</h4>
           <ul className="space-y-3 text-sm">
             <li><a href="#" className="text-neutral-500 hover:text-primary transition-colors">Điều khoản sử dụng</a></li>
