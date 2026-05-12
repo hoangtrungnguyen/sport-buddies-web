@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp, CalendarDays } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -205,6 +205,22 @@ export default function OwnerSection() {
               </div>
               <h3 className="text-xl font-bold mb-4">Duyệt booking bằng 1 chạm</h3>
               <p className="text-neutral-500 leading-relaxed text-sm">Duyệt hoặc từ chối lịch đặt chỉ với một cú chạm. Sau khi duyệt, số điện thoại khách hiện ra để bạn liên hệ ngay.</p>
+            </motion.div>
+
+            {/* grava-4ff8.1.9: 7-day court calendar — view all slots, block hours, recurring weekly schedule */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
+            >
+              <div className="w-14 h-14 bg-warning-bg rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <CalendarDays className="text-warning" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Lịch sân 7 ngày</h3>
+              <p className="text-neutral-500 leading-relaxed text-sm">Xem toàn bộ slot trong tuần, khoá khung giờ bận và tạo lịch cố định hàng tuần — quản lý sân chủ động từ một màn hình.</p>
             </motion.div>
           </div>
         </div>
