@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, UserX, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp, CalendarDays, UserPlus, BarChart2, MapPin } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -114,53 +114,91 @@ export default function OwnerSection() {
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="py-24 bg-background" data-testid="benefits-section">
+      {/* SpB Solutions */}
+      <section className="py-24 bg-background">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-black mb-4">SportBuddies giúp bạn</h2>
-            <p className="text-neutral-600 max-w-xl mx-auto">Công cụ mạnh mẽ giúp chủ sân tối ưu vận hành và tăng doanh thu.</p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 bg-success-bg text-primary px-4 py-2 rounded-full mb-6 font-bold text-sm border border-primary/10"
+            >
+              <CheckCircle2 size={16} className="fill-primary text-white" />
+              Dashboard thực tế
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.05 }}
+              className="text-3xl font-black mb-4"
+            >
+              Giải pháp SportBuddies dành cho chủ sân
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-neutral-600 max-w-xl mx-auto"
+            >
+              Tất cả tính năng bạn cần để vận hành sân hiệu quả — ngay trên điện thoại.
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                icon: <CalendarDays className="text-primary" />,
-                iconTestId: "benefit-icon-calendar",
-                bg: "bg-primary-light",
-                title: "Quản lý lịch sân trực quan theo tuần",
-                desc: "Xem toàn bộ lịch đặt sân trong tuần chỉ với một cái nhìn — dễ dàng phát hiện giờ trống và sắp xếp lịch tối ưu.",
-              },
-              {
-                icon: <BellRing className="text-warning" />,
-                iconTestId: "benefit-icon-bell",
-                bg: "bg-warning-bg",
-                title: "Nhận thông báo đặt sân ngay lập tức",
-                desc: "Mỗi khi có khách đặt sân, bạn nhận thông báo tức thì — không bỏ lỡ bất kỳ booking nào.",
-              },
-              {
-                icon: <BarChart3 className="text-success" />,
-                iconTestId: "benefit-icon-chart",
+                icon: <Bell className="text-primary" />,
                 bg: "bg-success-bg",
-                title: "Theo dõi doanh thu theo thời gian thực",
-                desc: "Báo cáo doanh thu cập nhật liên tục giúp bạn nắm rõ hiệu quả kinh doanh mọi lúc.",
+                title: "Nhận thông báo tức thì",
+                desc: "Mỗi khi có người đặt sân, bạn nhận ngay thông báo — không bỏ lỡ bất kỳ booking nào."
               },
-            ].map((item) => (
+              {
+                icon: <ThumbsUp className="text-primary" />,
+                bg: "bg-success-bg",
+                title: "Duyệt booking bằng 1 chạm",
+                desc: "Duyệt hoặc từ chối booking nhanh chóng. Số điện thoại khách hiện ngay sau khi bạn duyệt."
+              },
+              {
+                icon: <CalendarDays className="text-primary" />,
+                bg: "bg-success-bg",
+                title: "Lịch sân 7 ngày",
+                desc: "Xem tất cả slot trong tuần, khoá giờ bảo trì và tạo lịch cố định hàng tuần chỉ một lần."
+              },
+              {
+                icon: <UserPlus className="text-primary" />,
+                bg: "bg-success-bg",
+                title: "Thêm booking tại quầy",
+                desc: "Nhận booking cho khách walk-in trực tiếp tại sân mà không cần giấy tờ hay ghi chú thủ công."
+              },
+              {
+                icon: <BarChart2 className="text-primary" />,
+                bg: "bg-success-bg",
+                title: "Thống kê doanh thu",
+                desc: "Xem báo cáo doanh thu và giờ cao điểm theo tuần để tối ưu lịch hoạt động và giá sân."
+              },
+              {
+                icon: <MapPin className="text-primary" />,
+                bg: "bg-success-bg",
+                title: "Hiển thị trên bản đồ SpB",
+                desc: "Sân của bạn xuất hiện trên bản đồ SportBuddies cho hàng nghìn người chơi tại TP.HCM."
+              }
+            ].map((item, i) => (
               <motion.div
-                key={item.title}
+                key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ delay: i * 0.07 }}
                 whileHover={{ y: -5 }}
                 className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
               >
-                <div
-                  data-testid={item.iconTestId}
-                  className={`w-14 h-14 ${item.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
-                >
+                <div className={`w-14 h-14 ${item.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                 <p className="text-neutral-500 leading-relaxed text-sm">{item.desc}</p>
               </motion.div>
             ))}
