@@ -1,8 +1,16 @@
 /**
  * submitLead — Captures owner lead form submissions.
  *
- * Reads UTM attribution params from the current page URL and posts a record to
- * the `leads` table with `type = "owner"`.
+ * Reads UTM attribution params and optional agent referral code from the
+ * current page URL and posts a record to the `leads` table with
+ * `type = "owner"`.
+ *
+ * Agent attribution
+ * -----------------
+ * If the landing URL includes `?agent=CODE`, the CODE is captured in the
+ * hidden `agent_code` field and forwarded to the backend so that commission
+ * can be attributed to the referring agent.  The field is never rendered in
+ * the form UI — it is read purely from the query string.
  *
  * TODO: Replace the fetch call below with your actual backend endpoint or a
  * Supabase client call once the backend is wired up.
@@ -25,6 +33,8 @@ export interface LeadPayload {
   utm_source: string | null;
   utm_medium: string | null;
   utm_campaign: string | null;
+  /** Referring agent code read from `?agent=CODE` in the landing URL. */
+  agent_code: string | null;
 }
 
 /**
@@ -44,7 +54,25 @@ export function readUtmParams(): Pick<
 }
 
 /**
+ * Reads the referring agent code from the `?agent` query-string parameter.
+ *
+ * Returns the trimmed code string, or `null` when the parameter is absent or
+ * blank.  This value is intended to be stored in `leads.agent_code` for
+ * commission attribution — it is never displayed to the end user.
+ */
+export function readAgentCode(): string | null {
+  const params = new URLSearchParams(window.location.search);
+  const raw = params.get('agent');
+  if (!raw) return null;
+  const trimmed = raw.trim();
+  return trimmed.length > 0 ? trimmed : null;
+}
+
+/**
  * Submits an owner lead to the `leads` table.
+ *
+ * Automatically captures UTM params and the agent referral code from the
+ * current URL and merges them into the payload.
  *
  * @param formData  Fields collected from the LeadForm.
  * @returns         A promise that resolves when the record has been written.
@@ -56,11 +84,13 @@ export async function submitLead(
   formData: Pick<LeadPayload, 'name' | 'phone' | 'court_name'>
 ): Promise<void> {
   const utmParams = readUtmParams();
+  const agentCode = readAgentCode();
 
   const payload: LeadPayload = {
     type: 'owner',
     ...formData,
     ...utmParams,
+    agent_code: agentCode,
   };
 
   // TODO: Replace this fetch call with your actual endpoint or Supabase client.
