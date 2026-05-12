@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, BarChart3, CalendarDays, BellRing } from 'lucide-react';
+import { ArrowRight, PhoneOff, Clock, TrendingDown, CheckCircle2 } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -94,8 +94,8 @@ export default function OwnerSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: <PhoneOff className="text-error" />, bg: "bg-error-container/30", title: "Bỏ lỡ booking vì điện thoại bận", desc: "Khách gọi đặt sân nhưng điện thoại bận, không ai nghe — booking tuột khỏi tay." },
-              { icon: <Hourglass className="text-warning" />, bg: "bg-warning-bg", title: "Giờ trống lãng phí", desc: "Nhiều khung giờ (sáng, trưa) vắng khách trong khi vẫn phải trả chi phí." },
+              { icon: <PhoneOff className="text-error" />, bg: "bg-error-container/30", title: "Bỏ lỡ khách hàng", desc: "Khách gọi điện nhưng bạn bận hoặc nhân viên không bắt máy kịp thời." },
+              { icon: <Clock className="text-warning" />, bg: "bg-warning-bg", title: "Giờ trống không ai biết để đặt", desc: "Lịch sân còn trống nhưng không có kênh nào để khách hàng dễ dàng tìm thấy và đặt ngay." },
               { icon: <TrendingDown className="text-neutral-600" />, bg: "bg-neutral-100", title: "Khó tiếp cận khách mới", desc: "Phụ thuộc vào khách quen, không có kênh quảng bá hiệu quả." }
             ].map((item, i) => (
               <motion.div
