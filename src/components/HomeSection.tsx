@@ -10,6 +10,7 @@ import WhyChooseSection from './sections/WhyChooseSection';
 import FeaturedCourtsSection from './sections/FeaturedCourtsSection';
 import SportsSection from './SportsSection';
 import AppScreenshotsSection from './AppScreenshotsSection';
+import PwaInstallSection from './PwaInstallSection';
 import CTASection from './sections/CTASection';
 
 export default function HomeSection() {
@@ -22,6 +23,7 @@ export default function HomeSection() {
       <FeaturedCourtsSection />
       <SportsSection />
       <AppScreenshotsSection />
+      <PwaInstallSection />
       <CTASection />
     </>
   );
