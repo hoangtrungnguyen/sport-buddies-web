@@ -5,7 +5,7 @@
 
 import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
-import { Download, Share, PlusSquare, Smartphone } from 'lucide-react';
+import { Download, Share, SquarePlus, Smartphone, MoreVertical } from 'lucide-react';
 
 interface InstallStepProps {
   step: number;
@@ -48,6 +48,7 @@ export default function PwaInstallSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
             className="inline-flex items-center gap-2 bg-primary-light text-primary px-4 py-2 rounded-full mb-6 font-semibold text-sm border border-primary/10"
           >
             <Download size={16} />
@@ -98,7 +99,6 @@ export default function PwaInstallSection() {
               </div>
             </div>
 
-            {/* iOS Step 1: Tap Share */}
             <div className="flex flex-col gap-6">
               <InstallStep
                 step={1}
@@ -107,29 +107,48 @@ export default function PwaInstallSection() {
                 description="Mở Safari, truy cập SportBuddies rồi nhấn biểu tượng Chia sẻ ở thanh công cụ phía dưới màn hình."
               />
 
-              {/* iOS Step 2: Add to Home Screen */}
               <InstallStep
                 step={2}
-                icon={<PlusSquare size={20} />}
+                icon={<SquarePlus size={20} />}
                 title='Chọn "Thêm vào Màn hình chính"'
                 description='Cuộn danh sách tùy chọn xuống, chọn "Thêm vào Màn hình chính" (Add to Home Screen) rồi nhấn "Thêm" để xác nhận.'
               />
             </div>
           </motion.div>
 
-          {/* Android placeholder (task 6.3) */}
+          {/* Android card */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-neutral-50 rounded-2xl p-8 border border-neutral-100 flex flex-col items-center justify-center text-center"
-            data-testid="android-install-placeholder"
+            className="bg-neutral-50 rounded-2xl p-8 border border-neutral-100"
+            data-testid="android-install-card"
           >
-            <div className="w-16 h-16 bg-neutral-200 rounded-2xl flex items-center justify-center mb-4">
-              <Smartphone size={28} className="text-neutral-400" />
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                <Smartphone size={20} className="text-white" />
+              </div>
+              <div>
+                <h3 className="font-black text-neutral-900 text-lg">Android</h3>
+                <p className="text-xs text-neutral-500">Dùng Chrome hoặc trình duyệt mặc định</p>
+              </div>
             </div>
-            <h3 className="font-black text-neutral-400 text-lg mb-2">Android</h3>
-            <p className="text-sm text-neutral-400">Hướng dẫn cho Android sắp ra mắt.</p>
+
+            <div className="flex flex-col gap-6">
+              <InstallStep
+                step={1}
+                icon={<MoreVertical size={20} />}
+                title="Nhấn menu trình duyệt (⋮)"
+                description="Mở Chrome hoặc trình duyệt mặc định, truy cập SportBuddies rồi nhấn biểu tượng ba chấm (⋮) ở góc trên bên phải."
+              />
+
+              <InstallStep
+                step={2}
+                icon={<SquarePlus size={20} />}
+                title='Chọn "Thêm vào màn hình chính" hoặc "Cài đặt ứng dụng"'
+                description='Chọn "Thêm vào màn hình chính" (Add to Home Screen) hoặc "Cài đặt ứng dụng" (Install app) và xác nhận để hoàn tất.'
+              />
+            </div>
           </motion.div>
         </div>
       </div>
