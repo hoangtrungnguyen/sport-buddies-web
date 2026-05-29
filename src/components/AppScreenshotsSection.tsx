@@ -262,7 +262,7 @@ function SlotPickerScreen() {
 // ----- Screen 4: Booking Confirmed -----
 function BookingConfirmedScreen() {
   return (
-    <div className="w-full h-full bg-white flex flex-col items-center justify-center px-4">
+    <div className="w-full h-full bg-white flex flex-col items-center justify-center px-4 relative">
       {/* Status bar */}
       <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-4 pt-3 pb-1">
         <span className="text-[9px] font-black text-neutral-800">9:41</span>
@@ -326,10 +326,10 @@ function PhoneMockup({ children, label, delay = 0 }: PhoneMockupProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
-      className="flex flex-col items-center gap-3"
+      className="flex flex-col items-center gap-3 snap-center flex-shrink-0"
     >
       {/* Phone frame */}
-      <div className="relative w-[155px] aspect-[9/19] rounded-[2rem] bg-neutral-900 shadow-2xl border-[7px] border-neutral-900 overflow-hidden flex-shrink-0">
+      <div className="relative w-[155px] aspect-[9/19] rounded-[2rem] bg-neutral-900 shadow-2xl border-[7px] border-neutral-900 overflow-hidden">
         {/* Notch */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-4 bg-neutral-900 rounded-b-xl z-20"></div>
         {/* Screen content */}
@@ -391,8 +391,10 @@ export default function AppScreenshotsSection() {
           </p>
         </motion.div>
 
-        {/* Phone mockups */}
-        <div className="flex flex-wrap justify-center gap-8 lg:gap-10">
+        {/* Phone mockups:
+            - Mobile: horizontal scroll carousel (overflow-x-auto, flex, snap-x snap-mandatory)
+            - Desktop md+: 2-column grid (grid grid-cols-2 gap-6) */}
+        <div className="md:hidden overflow-x-auto flex gap-4 snap-x snap-mandatory pb-4 -mx-6 px-6">
           {screens.map((screen, i) => (
             <PhoneMockup key={i} label={screen.label} delay={screen.delay}>
               {screen.component}
@@ -400,14 +402,13 @@ export default function AppScreenshotsSection() {
           ))}
         </div>
 
-        {/* Connecting line (decorative, desktop only) */}
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="hidden lg:block mt-8 mx-auto max-w-[700px] h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent origin-left"
-        ></motion.div>
+        <div className="hidden md:grid grid-cols-2 gap-6 justify-items-center">
+          {screens.map((screen, i) => (
+            <PhoneMockup key={i} label={screen.label} delay={screen.delay}>
+              {screen.component}
+            </PhoneMockup>
+          ))}
+        </div>
       </div>
     </section>
   );
