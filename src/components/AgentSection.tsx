@@ -50,8 +50,8 @@ const agentProfiles: AgentProfile[] = [
     title: 'Cửa hàng dụng cụ thể thao',
     description:
       'Khách hàng của bạn chính là người chơi thể thao đang tìm sân. Kết hợp bán hàng với giới thiệu sân để có thêm nguồn thu.',
-    iconBg: 'bg-neutral-100',
-    iconColor: 'text-neutral-600',
+    iconBg: 'bg-secondary-bg',
+    iconColor: 'text-secondary',
   },
 ];
 
