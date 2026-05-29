@@ -33,7 +33,7 @@ const agentProfiles: AgentProfile[] = [
     description:
       'Bạn quản lý nhóm chơi thể thao thường xuyên và quen biết nhiều chủ sân. Tận dụng mạng lưới đó để tạo thu nhập thụ động.',
     iconBg: 'bg-success-bg',
-    iconColor: 'text-primary',
+    iconColor: 'text-blue-600',
   },
   {
     role: 'gym_owner',
@@ -104,11 +104,19 @@ export default function AgentSection() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               {/* TODO: wire onClick to registration flow in a future story */}
-              <button className="bg-primary text-white font-black px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2">
+              <button
+                type="button"
+                aria-disabled="true"
+                className="bg-primary text-white font-black px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
+              >
                 Đăng ký làm đại lý
                 <ArrowRight size={20} />
               </button>
-              <button className="bg-white text-primary border-2 border-primary font-bold px-8 h-14 rounded-full hover:bg-primary-light transition-all flex items-center justify-center gap-2 active:scale-95">
+              <button
+                type="button"
+                aria-disabled="true"
+                className="bg-white text-primary border-2 border-primary font-bold px-8 h-14 rounded-full hover:bg-primary-light transition-all flex items-center justify-center gap-2 active:scale-95"
+              >
                 Tìm hiểu thêm
               </button>
             </div>
@@ -118,6 +126,7 @@ export default function AgentSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
             className="lg:col-span-5 bg-white rounded-3xl shadow-2xl p-8 border border-neutral-100"
           >
             <h3 className="text-2xl font-black mb-2">Thu nhập của đại lý</h3>
@@ -150,7 +159,11 @@ export default function AgentSection() {
             </div>
 
             {/* TODO: wire onClick to registration flow in a future story */}
-            <button className="mt-8 w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+            <button
+              type="button"
+              aria-disabled="true"
+              className="mt-8 w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+            >
               Bắt đầu ngay hôm nay
               <ArrowRight size={20} />
             </button>
@@ -187,6 +200,7 @@ export default function AgentSection() {
             {agentProfiles.map((profile, i) => (
               <motion.div
                 key={profile.role}
+                data-role={profile.role}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
