@@ -5,8 +5,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
-import { isValidVietnamesePhone } from '../utils/validation';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Gift, Wrench, Users2, MessageCircle } from 'lucide-react';
 
 export default function OwnerSection() {
   const [submitted, setSubmitted] = useState(false);
@@ -143,6 +142,99 @@ export default function OwnerSection() {
               </>
             )}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Why Choose SpB? */}
+      <section className="py-24 bg-white">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 bg-primary-light text-primary px-4 py-2 rounded-full mb-6 font-bold text-sm border border-primary/10"
+            >
+              <CheckCircle2 size={16} className="fill-primary text-white" />
+              Cam kết từ SportBuddies
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-3xl md:text-4xl font-black mb-4"
+            >
+              Tại sao chọn <span className="text-primary">SpB</span>?
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-neutral-600 max-w-xl mx-auto"
+            >
+              Chúng tôi không chỉ cung cấp phần mềm — chúng tôi đồng hành cùng bạn từ ngày đầu tiên.
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: <Gift size={28} className="text-primary" />,
+                iconBg: "bg-primary-light",
+                title: "Miễn phí 3 tháng đầu",
+                desc: "Trải nghiệm toàn bộ tính năng không giới hạn trong 3 tháng đầu, không cần nhập thẻ.",
+                badge: "FREE",
+                badgeColor: "bg-success text-white"
+              },
+              {
+                icon: <Wrench size={28} className="text-secondary" />,
+                iconBg: "bg-secondary/10",
+                title: "Không mất phí setup",
+                desc: "Đội ngũ kỹ thuật hỗ trợ cài đặt và onboarding hoàn toàn miễn phí cho sân của bạn.",
+                badge: "0đ",
+                badgeColor: "bg-secondary-container text-white"
+              },
+              {
+                icon: <Users2 size={28} className="text-primary-container" />,
+                iconBg: "bg-success-bg",
+                title: "Tụi mình mang khách đến sân",
+                desc: "Hàng nghìn người chơi đang tìm kiếm sân mỗi ngày trên nền tảng SportBuddies.",
+                badge: "1000+",
+                badgeColor: "bg-primary text-white"
+              },
+              {
+                icon: <MessageCircle size={28} className="text-tertiary" />,
+                iconBg: "bg-tertiary/10",
+                title: "Hỗ trợ Zalo 7 ngày đầu",
+                desc: "Đội support tận tâm qua Zalo, giải đáp mọi thắc mắc trong 7 ngày đầu kích hoạt.",
+                badge: "7 ngày",
+                badgeColor: "bg-tertiary text-white"
+              }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -6 }}
+                className="bg-neutral-50 p-7 rounded-3xl border border-neutral-100 group transition-all hover:shadow-lg hover:border-primary/10 flex flex-col"
+              >
+                <div className="flex items-start justify-between mb-6">
+                  <div className={`w-14 h-14 ${item.iconBg} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                    {item.icon}
+                  </div>
+                  <span className={`text-xs font-black px-3 py-1 rounded-full ${item.badgeColor}`}>
+                    {item.badge}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold mb-3 leading-snug">{item.title}</h3>
+                <p className="text-neutral-500 leading-relaxed text-sm flex-grow">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
