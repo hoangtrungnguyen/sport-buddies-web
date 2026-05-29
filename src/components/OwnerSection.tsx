@@ -5,7 +5,7 @@
 
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp, CalendarDays, UserPlus, BarChart2 } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp, CalendarDays, UserPlus, BarChart2, MapPin } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -204,12 +204,10 @@ export default function OwnerSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* grava-4ff8.1.7: instant booking notification card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0 }}
               whileHover={{ y: -5 }}
               className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
             >
@@ -220,7 +218,6 @@ export default function OwnerSection() {
               <p className="text-neutral-500 leading-relaxed text-sm">Mỗi khi có người đặt sân, bạn nhận ngay thông báo — không bỏ lỡ bất kỳ booking nào.</p>
             </motion.div>
 
-            {/* grava-4ff8.1.8: approve/reject booking with phone reveal card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -236,7 +233,6 @@ export default function OwnerSection() {
               <p className="text-neutral-500 leading-relaxed text-sm">Duyệt hoặc từ chối lịch đặt chỉ với một cú chạm. Sau khi duyệt, số điện thoại khách hiện ra để bạn liên hệ ngay.</p>
             </motion.div>
 
-            {/* grava-4ff8.1.9: 7-day court calendar — view all slots, block hours, recurring weekly schedule */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -252,7 +248,6 @@ export default function OwnerSection() {
               <p className="text-neutral-500 leading-relaxed text-sm">Xem toàn bộ slot trong tuần, khoá khung giờ bận và tạo lịch cố định hàng tuần — quản lý sân chủ động từ một màn hình.</p>
             </motion.div>
 
-            {/* grava-4ff8.1.10: counter booking for walk-in customers */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -268,7 +263,6 @@ export default function OwnerSection() {
               <p className="text-neutral-500 leading-relaxed text-sm">Tạo booking ngay tại quầy cho khách walk-in — nhập tên, số điện thoại và chọn khung giờ chỉ trong vài giây.</p>
             </motion.div>
 
-            {/* grava-4ff8.1.11: weekly revenue stats and peak-hour analytics */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -277,11 +271,26 @@ export default function OwnerSection() {
               whileHover={{ y: -5 }}
               className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
             >
-              <div className="w-14 h-14 bg-primary-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <BarChart2 className="text-primary" />
+              <div className="w-14 h-14 bg-neutral-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <BarChart2 className="text-neutral-600" />
               </div>
               <h3 className="text-xl font-bold mb-4">Thống kê doanh thu & giờ cao điểm</h3>
               <p className="text-neutral-500 leading-relaxed text-sm">Xem doanh thu theo tuần và khung giờ đông khách nhất — ra quyết định giá linh hoạt và tối ưu lịch vận hành.</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.25 }}
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
+            >
+              <div className="w-14 h-14 bg-success-bg rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <MapPin className="text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Xuất hiện trên bản đồ SportBuddies</h3>
+              <p className="text-neutral-500 leading-relaxed text-sm">Sân của bạn hiển thị cho hàng nghìn người chơi đang tìm kiếm tại TP.HCM — tiếp cận khách mới mà không cần quảng cáo.</p>
             </motion.div>
           </div>
         </div>
