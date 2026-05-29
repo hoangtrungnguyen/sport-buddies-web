@@ -5,7 +5,7 @@
 
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Bell, ThumbsUp } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -102,7 +102,7 @@ export default function OwnerSection() {
             <h3 className="text-2xl font-black mb-2">Bắt đầu ngay hôm nay</h3>
             <p className="text-neutral-500 text-sm mb-8">Điền thông tin để nhận tư vấn miễn phí trong 24h.</p>
 
-            <form className="space-y-5" onSubmit={handleSubmit}>
+            <form className="space-y-5">
               <div>
                 <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Họ và tên</label>
                 <input
@@ -116,25 +116,8 @@ export default function OwnerSection() {
                 <input
                   type="tel"
                   placeholder="090 123 4567"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  aria-describedby={phoneError ? 'phone-error' : undefined}
-                  aria-invalid={phoneError ? true : undefined}
-                  className={`w-full h-14 rounded-2xl px-5 border bg-neutral-50 focus:outline-none focus:ring-1 transition-all font-medium placeholder-neutral-300 ${
-                    phoneError
-                      ? 'border-red-400 focus:border-red-400 focus:ring-red-400'
-                      : 'border-neutral-200 focus:border-primary focus:ring-primary'
-                  }`}
+                  className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
                 />
-                {phoneError && (
-                  <p
-                    id="phone-error"
-                    role="alert"
-                    className="mt-1.5 px-1 text-xs text-red-500 font-medium"
-                  >
-                    {phoneError}
-                  </p>
-                )}
               </div>
               <div>
                 <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Tên sân thể thao</label>
@@ -195,11 +178,10 @@ export default function OwnerSection() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0 }}
               className="inline-flex items-center gap-2 bg-success-bg text-primary px-4 py-2 rounded-full mb-6 font-bold text-sm border border-primary/10"
             >
               <CheckCircle2 size={16} className="fill-primary text-white" />
-              Dashboard thực tế
+              Tính năng nổi bật
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 10 }}
@@ -236,6 +218,22 @@ export default function OwnerSection() {
               </div>
               <h3 className="text-xl font-bold mb-4">Nhận thông báo tức thì</h3>
               <p className="text-neutral-500 leading-relaxed text-sm">Mỗi khi có người đặt sân, bạn nhận ngay thông báo — không bỏ lỡ bất kỳ booking nào.</p>
+            </motion.div>
+
+            {/* grava-4ff8.1.8: approve/reject booking with phone reveal card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.05 }}
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
+            >
+              <div className="w-14 h-14 bg-primary-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <ThumbsUp className="text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Duyệt booking bằng 1 chạm</h3>
+              <p className="text-neutral-500 leading-relaxed text-sm">Duyệt hoặc từ chối lịch đặt chỉ với một cú chạm. Sau khi duyệt, số điện thoại khách hiện ra để bạn liên hệ ngay.</p>
             </motion.div>
           </div>
         </div>
