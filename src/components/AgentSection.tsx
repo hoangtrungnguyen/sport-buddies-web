@@ -90,7 +90,7 @@ export default function AgentSection() {
               transition={{ delay: 0.1, duration: 0.4 }}
               className="text-xl md:text-2xl font-bold text-neutral-800 max-w-xl mb-6 leading-snug"
             >
-              Giới thiệu sân thể thao cho SpB — nhận 200,000 VND mỗi sân hoạt động. Không cần vốn.
+              Giới thiệu sân thể thao cho SpB — nhận hoa hồng hấp dẫn. Không cần vốn.
             </motion.p>
 
             <motion.p
@@ -106,16 +106,16 @@ export default function AgentSection() {
               {/* TODO: wire onClick to registration flow in a future story */}
               <button
                 type="button"
-                aria-disabled="true"
-                className="bg-primary text-white font-black px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2"
+                disabled
+                className="bg-primary text-white font-black px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 Đăng ký làm đại lý
                 <ArrowRight size={20} />
               </button>
               <button
                 type="button"
-                aria-disabled="true"
-                className="bg-white text-primary border-2 border-primary font-bold px-8 h-14 rounded-full hover:bg-primary-light transition-all flex items-center justify-center gap-2 active:scale-95"
+                disabled
+                className="bg-white text-primary border-2 border-primary font-bold px-8 h-14 rounded-full hover:bg-primary-light transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 Tìm hiểu thêm
               </button>
@@ -161,8 +161,8 @@ export default function AgentSection() {
             {/* TODO: wire onClick to registration flow in a future story */}
             <button
               type="button"
-              aria-disabled="true"
-              className="mt-8 w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+              disabled
+              className="mt-8 w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               Bắt đầu ngay hôm nay
               <ArrowRight size={20} />
@@ -206,7 +206,7 @@ export default function AgentSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.4 }}
                 whileHover={{ y: -5 }}
-                className="bg-neutral-50 p-8 rounded-3xl border border-neutral-100 group transition-all cursor-pointer hover:shadow-md"
+                className="bg-neutral-50 p-8 rounded-3xl border border-neutral-100 group cursor-pointer hover:shadow-md"
               >
                 <div
                   className={`w-14 h-14 ${profile.iconBg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
