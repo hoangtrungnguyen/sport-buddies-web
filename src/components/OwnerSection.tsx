@@ -5,8 +5,7 @@
 
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
-import { isValidVietnamesePhone } from '../utils/validation';
+import { ArrowRight, PhoneOff, Clock, TrendingDown, CheckCircle2 } from 'lucide-react';
 
 export default function OwnerSection() {
   const avatars = [
@@ -168,30 +167,9 @@ export default function OwnerSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              {
-                icon: <PhoneOff className="text-error" />,
-                bg: "bg-error-container/30",
-                title: "Bỏ lỡ booking vì điện thoại bận",
-                desc: "Khách đặt sân qua điện thoại nhưng bạn bận hoặc không bắt máy kịp, dẫn đến mất khách."
-              },
-              {
-                icon: <CalendarX className="text-warning" />,
-                bg: "bg-warning-bg",
-                title: "Quản lý lịch thủ công rất mất thời gian",
-                desc: "Ghi chép lịch đặt bằng tay, dễ nhầm lẫn và tốn nhiều công sức mỗi ngày."
-              },
-              {
-                icon: <Users className="text-neutral-600" />,
-                bg: "bg-neutral-100",
-                title: "Không có khách mới ngoài khách quen",
-                desc: "Hoàn toàn phụ thuộc vào khách quen, không có kênh tiếp cận khách hàng mới hiệu quả."
-              },
-              {
-                icon: <Hourglass className="text-primary" />,
-                bg: "bg-primary-light/30",
-                title: "Giờ trống lãng phí",
-                desc: "Nhiều khung giờ (sáng, trưa) vắng khách trong khi vẫn phải trả chi phí vận hành."
-              }
+              { icon: <PhoneOff className="text-error" />, bg: "bg-error-container/30", title: "Bỏ lỡ khách hàng", desc: "Khách gọi điện nhưng bạn bận hoặc nhân viên không bắt máy kịp thời." },
+              { icon: <Clock className="text-warning" />, bg: "bg-warning-bg", title: "Giờ trống không ai biết để đặt", desc: "Lịch sân còn trống nhưng không có kênh nào để khách hàng dễ dàng tìm thấy và đặt ngay." },
+              { icon: <TrendingDown className="text-neutral-600" />, bg: "bg-neutral-100", title: "Khó tiếp cận khách mới", desc: "Phụ thuộc vào khách quen, không có kênh quảng bá hiệu quả." }
             ].map((item, i) => (
               <motion.div
                 key={i}

@@ -12,8 +12,31 @@ import OwnerSection from './components/OwnerSection';
 import AppLandingSection from './components/AppLandingSection';
 import AgentSection from './components/AgentSection';
 
+const pathToSection: Record<string, string> = {
+  '/': 'home',
+  '/cho-chu-san': 'owner',
+  '/ve-chung-toi': 'about',
+};
+
+const sectionToPath: Record<string, string> = {
+  'home': '/',
+  'owner': '/cho-chu-san',
+  'about': '/ve-chung-toi',
+};
+
 export default function App() {
-  const [section, setSection] = useState('home');
+  const [section, setSection] = useState(() => pathToSection[window.location.pathname] ?? 'home');
+
+  const navigate = (s: string) => {
+    setSection(s);
+    window.history.pushState(null, '', sectionToPath[s] ?? '/');
+  };
+
+  useEffect(() => {
+    const onPop = () => setSection(pathToSection[window.location.pathname] ?? 'home');
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -36,7 +59,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-primary-light selection:text-primary">
-      <Navbar currentSection={section} setSection={setSection} />
+      <Navbar currentSection={section} setSection={navigate} />
       
       <main className="flex-grow">
         <motion.div

@@ -3,8 +3,25 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-/** Placeholder Zalo support number — replace with the real OA link before go-live. */
 const ZALO_SUPPORT_URL = "https://zalo.me/0900000000";
+const FACEBOOK_URL = "https://facebook.com/sportbuddies";
+const TIKTOK_URL = "https://tiktok.com/@sportbuddies";
+
+function Facebook({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
+function TikTokIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+    </svg>
+  );
+}
 
 function ZaloBadge() {
   return (
@@ -31,6 +48,16 @@ export default function Footer() {
           <p className="text-neutral-500 text-sm">
             © 2026 SportBuddies. All rights reserved.
           </p>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-neutral-900 mb-4 uppercase tracking-wider text-xs">Môn thể thao</h4>
+          <ul className="space-y-3 text-sm">
+            <li><a href="/bong-da" title="Sân Bóng đá tại TP.HCM" aria-label="Xem sân Bóng đá tại TP.HCM" className="text-neutral-500 hover:text-primary transition-colors">Bóng đá</a></li>
+            <li><a href="/cau-long" title="Sân Cầu lông tại TP.HCM" aria-label="Xem sân Cầu lông tại TP.HCM" className="text-neutral-500 hover:text-primary transition-colors">Cầu lông</a></li>
+            <li><a href="/pickleball" title="Sân Pickleball tại TP.HCM" aria-label="Xem sân Pickleball tại TP.HCM" className="text-neutral-500 hover:text-primary transition-colors">Pickleball</a></li>
+            <li><a href="/tennis" title="Sân Tennis tại TP.HCM" aria-label="Xem sân Tennis tại TP.HCM" className="text-neutral-500 hover:text-primary transition-colors">Tennis</a></li>
+          </ul>
         </div>
 
         <div>
