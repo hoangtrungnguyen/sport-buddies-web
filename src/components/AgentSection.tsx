@@ -33,7 +33,7 @@ const agentProfiles: AgentProfile[] = [
     description:
       'Bạn quản lý nhóm chơi thể thao thường xuyên và quen biết nhiều chủ sân. Tận dụng mạng lưới đó để tạo thu nhập thụ động.',
     iconBg: 'bg-success-bg',
-    iconColor: 'text-blue-600',
+    iconColor: 'text-success',
   },
   {
     role: 'gym_owner',
@@ -206,7 +206,7 @@ export default function AgentSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.4 }}
                 whileHover={{ y: -5 }}
-                className="bg-neutral-50 p-8 rounded-3xl border border-neutral-100 group cursor-pointer hover:shadow-md"
+                className="bg-neutral-50 p-8 rounded-3xl border border-neutral-100 group hover:shadow-md"
               >
                 <div
                   className={`w-14 h-14 ${profile.iconBg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
