@@ -3,21 +3,23 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
-import LeadForm, { LeadFormData } from './LeadForm';
-import { submitLead } from '../lib/submitLead';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
+import { isValidVietnamesePhone } from '../utils/validation';
 
 export default function OwnerSection() {
+  const [submitted, setSubmitted] = useState(false);
+
   const avatars = [
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCAomYcR7grTrIjhfL82HbXhQyoMPe0oXI1tb7u2jDSgSmgJZEec--Zm2fAegqkYUbTDwteS0SV-c-MDB9KgtsDbbf7e5jbGKTR5kUq9IDFsfA-llDWrTRSHM_RhXmYhavK3bc-VlJUEongkBsfFUu0qndqSQQ3YIrfaKAeEpcVWKlosvfm27y4q-xaB9KjBqS-qi7nmD9sKfhtLOILAoSmDdJLZNcXggVfNNCv0Ky-w0ckfQ6gT_uPwUEka5sZ9TBugFZ6NFd4ke38",
     "https://lh3.googleusercontent.com/aida-public/AB6AXuB4l86GMFL6WOrba04l_piPO7NqEzvpzVrGr7ksmA_gFZfMxqOqLmzOT_qUTA8Zv-wo22PetJulTxXojxUp6m_cWdD3yqX6OZMNxhPqHaCUQOKTDs5RgOA9feqx6ddRzBbLKs92EnDB60HxZTWc4JO9C9u9KOVPn2H1e_KvpMcu0qMjgsHXxGCG4U1jNlYoZk58jvJ9Y2OnyZsyfwxBmckeQOKUhtvSE7NKvLaB0FWv5Nw2AEwIrM-QGrHbqdqDqwnZf-s9MbwiIgud",
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAGix6TXOS_EkhOfiOn3ZFz7kbKUQ29l3pTZbdLtOW3h9JAGR5hgtpBWbIh5uOt2-vbecIYHTdS_tFiEfpGc2E1Rac2nC54Idpf2vo8X2dIb6znuQzU92ri9R4dQ5i0dyz0FQ9j05EY27c8vjGbcRFISvaM1DvfI2T3AvHgNu_1H-ioXCEDryB5kgz34Ore6MxHoyqixLdN2gyPf6bE9Iu9ea5-Q2e-o6imvpGKCO2RaFCWm2rCyIKHbG9JwGy3lGe0oAXDwxjT2nyd"
   ];
 
-  const handleLeadSubmit = async (data: LeadFormData): Promise<void> => {
-    await submitLead(data);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitted(true);
   };
 
   return (
@@ -77,10 +79,69 @@ export default function OwnerSection() {
             animate={{ opacity: 1, scale: 1 }}
             className="lg:col-span-5 bg-white rounded-3xl shadow-2xl p-8 border border-neutral-100"
           >
-            <h3 className="text-2xl font-black mb-2">Bắt đầu ngay hôm nay</h3>
-            <p className="text-neutral-500 text-sm mb-8">Điền thông tin để nhận tư vấn miễn phí trong 24h.</p>
+            {submitted ? (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex flex-col items-center justify-center py-8 text-center"
+                data-testid="success-message"
+                role="status"
+                aria-live="polite"
+              >
+                <div className="w-16 h-16 bg-success-bg rounded-full flex items-center justify-center mb-6">
+                  <CheckCircle2 size={32} className="text-primary" />
+                </div>
+                <h3 className="text-2xl font-black mb-3 text-neutral-900">
+                  Cảm ơn!
+                </h3>
+                <p className="text-neutral-600 text-base font-medium leading-relaxed">
+                  Tụi mình sẽ liên hệ bạn trong 24h
+                </p>
+              </motion.div>
+            ) : (
+              <>
+                <h3 className="text-2xl font-black mb-2">Bắt đầu ngay hôm nay</h3>
+                <p className="text-neutral-500 text-sm mb-8">Điền thông tin để nhận tư vấn miễn phí trong 24h.</p>
 
-            <LeadForm onSubmit={handleLeadSubmit} />
+                <form className="space-y-5" onSubmit={handleSubmit}>
+                  <div>
+                    <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Họ và tên</label>
+                    <input
+                      type="text"
+                      placeholder="Họ và tên của bạn"
+                      required
+                      className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Số điện thoại</label>
+                    <input
+                      type="tel"
+                      placeholder="090 123 4567"
+                      required
+                      className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-black uppercase tracking-wider text-neutral-400 mb-2 px-1">Tên sân thể thao</label>
+                    <input
+                      type="text"
+                      placeholder="VD: Pickleball Arena Quận 7"
+                      required
+                      className="w-full h-14 rounded-2xl px-5 border border-neutral-200 bg-neutral-50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium placeholder-neutral-300"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+                  >
+                    Đăng ký sân ngay
+                    <ArrowRight size={20} />
+                  </button>
+                  <p className="text-center text-[10px] text-neutral-400 font-medium">Cam kết bảo mật thông tin 100%.</p>
+                </form>
+              </>
+            )}
           </motion.div>
         </div>
       </section>
