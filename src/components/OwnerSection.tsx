@@ -4,7 +4,9 @@
  */
 
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, BarChart3 } from 'lucide-react';
+import { PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
+import LeadForm, { LeadFormData } from './LeadForm';
+import { submitLead } from '../lib/submitLead';
 
 export default function OwnerSection() {
   const avatars = [
@@ -13,15 +15,19 @@ export default function OwnerSection() {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAGix6TXOS_EkhOfiOn3ZFz7kbKUQ29l3pTZbdLtOW3h9JAGR5hgtpBWbIh5uOt2-vbecIYHTdS_tFiEfpGc2E1Rac2nC54Idpf2vo8X2dIb6znuQzU92ri9R4dQ5i0dyz0FQ9j05EY27c8vjGbcRFISvaM1DvfI2T3AvHgNu_1H-ioXCEDryB5kgz34Ore6MxHoyqixLdN2gyPf6bE9Iu9ea5-Q2e-o6imvpGKCO2RaFCWm2rCyIKHbG9JwGy3lGe0oAXDwxjT2nyd"
   ];
 
+  const handleLeadSubmit = async (data: LeadFormData): Promise<void> => {
+    await submitLead(data);
+  };
+
   return (
     <>
       <section className="relative pt-32 pb-24 overflow-hidden bg-background">
         <div className="absolute top-0 right-0 -mr-64 -mt-32 w-[600px] h-[600px] bg-primary-light rounded-full blur-[120px] opacity-40 pointer-events-none"></div>
-        
+
         <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
           {/* Hero Content */}
           <div className="lg:col-span-7">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className="inline-flex items-center gap-2 bg-success-bg text-primary px-4 py-2 rounded-full mb-8 font-bold text-sm border border-primary/10 shadow-sm"
@@ -29,7 +35,7 @@ export default function OwnerSection() {
               <CheckCircle2 size={16} className="fill-primary text-white" />
               Giải pháp tối ưu doanh thu
             </motion.div>
-            
+
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -37,8 +43,8 @@ export default function OwnerSection() {
             >
               Bạn là chủ sân?
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
@@ -46,14 +52,14 @@ export default function OwnerSection() {
             >
               Đăng ký miễn phí — tụi mình mang khách đến sân bạn
             </motion.p>
-            
+
             <div className="flex items-center gap-4">
               <div className="flex -space-x-3">
                 {avatars.map((url, i) => (
-                  <img 
-                    key={i} 
-                    src={url} 
-                    alt="Owner" 
+                  <img
+                    key={i}
+                    src={url}
+                    alt="Owner"
                     className="w-12 h-12 rounded-full border-4 border-white object-cover shadow-sm bg-neutral-100"
                   />
                 ))}
@@ -64,22 +70,16 @@ export default function OwnerSection() {
             </div>
           </div>
 
-          {/* CTA Card */}
+          {/* Form Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="lg:col-span-5 bg-white rounded-3xl shadow-2xl p-8 border border-neutral-100"
           >
             <h3 className="text-2xl font-black mb-2">Bắt đầu ngay hôm nay</h3>
-            <p className="text-neutral-500 text-sm mb-8">Miễn phí 3 tháng đầu — không cần thẻ tín dụng.</p>
+            <p className="text-neutral-500 text-sm mb-8">Điền thông tin để nhận tư vấn miễn phí trong 24h.</p>
 
-            <a
-              href="/cho-chu-san"
-              className="w-full h-14 bg-primary text-white rounded-2xl font-black hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
-            >
-              Đăng ký sân ngay
-              <ArrowRight size={20} />
-            </a>
+            <LeadForm onSubmit={handleLeadSubmit} />
           </motion.div>
         </div>
       </section>
