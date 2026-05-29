@@ -5,7 +5,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Gift, Wrench, Users2, MessageCircle } from 'lucide-react';
+import { ArrowRight, PhoneOff, Hourglass, TrendingDown, CheckCircle2, Gift, Wrench, Users2, MessageCircle, UserX, Bell, CalendarDays, MapPin, ThumbsUp, UserPlus, BarChart2, Users, CheckCircle } from 'lucide-react';
 
 export default function OwnerSection() {
   const [submitted, setSubmitted] = useState(false);
