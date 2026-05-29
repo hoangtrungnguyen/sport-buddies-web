@@ -3,29 +3,66 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle2 } from 'lucide-react';
+import { Globe, Zap, BadgeDollarSign, HeartHandshake } from 'lucide-react';
 
-interface CommissionRow {
-  activity: string;
-  amount: string;
+interface UrgencyBullet {
+  icon: ReactNode;
+  title: string;
+  description: string;
+  iconBg: string;
+  iconColor: string;
+  accentColor: string;
 }
 
-const COMMISSION_ROWS: CommissionRow[] = [
+const URGENCY_BULLETS: UrgencyBullet[] = [
   {
-    activity: '1 sân đăng ký + hoạt động ≥ 30 ngày',
-    amount: '200,000 VND',
+    icon: <Globe size={28} />,
+    title: 'Thị trường mới',
+    description:
+      'Mảng đặt sân thể thao trực tuyến tại Việt Nam đang ở giai đoạn đầu — cơ hội cho người vào sớm là rất lớn. Đại lý tiên phong sẽ nắm lợi thế trong khu vực của mình.',
+    iconBg: 'bg-primary-light',
+    iconColor: 'text-primary',
+    accentColor: 'border-primary/30',
+  },
+  {
+    icon: <Zap size={28} />,
+    title: 'Pickleball bùng nổ',
+    description:
+      'Pickleball tăng trưởng 300% mỗi năm tại TP.HCM. Hàng trăm sân mới mở liên tục — nhu cầu kết nối sân với nền tảng đặt lịch chưa bao giờ lớn hơn lúc này.',
+    iconBg: 'bg-warning-bg',
+    iconColor: 'text-warning',
+    accentColor: 'border-warning/30',
+  },
+  {
+    icon: <BadgeDollarSign size={28} />,
+    title: 'Phí 0 đồng',
+    description:
+      'Tham gia chương trình đại lý hoàn toàn miễn phí. Không cần vốn đầu tư, không ký hợp đồng ràng buộc. Bạn chỉ cần mạng lưới — SportBuddies lo phần còn lại.',
+    iconBg: 'bg-success-bg',
+    iconColor: 'text-primary',
+    accentColor: 'border-success/30',
+  },
+  {
+    icon: <HeartHandshake size={28} />,
+    title: 'SpB hỗ trợ trực tiếp',
+    description:
+      'Đội ngũ SportBuddies đồng hành cùng bạn từ ngày đầu: tư vấn cách tiếp cận chủ sân, hỗ trợ qua Zalo 24/7, và đào tạo kỹ năng bán hàng miễn phí.',
+    iconBg: 'bg-secondary-bg',
+    iconColor: 'text-secondary',
+    accentColor: 'border-secondary/30',
   },
 ];
 
 export default function AgentSection() {
   return (
     <>
-      {/* Commission Table Section */}
+      {/* "Tại sao ngay bây giờ?" Section */}
       <section
-        className="py-24 bg-background"
-        aria-labelledby="commission-table-heading"
-        data-testid="commission-table-section"
+        className="py-24 bg-white"
+        aria-labelledby="why-now-heading"
+        data-testid="why-now-section"
       >
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="text-center mb-16">
@@ -35,17 +72,17 @@ export default function AgentSection() {
               viewport={{ once: true }}
               className="inline-block text-sm font-black uppercase tracking-widest text-primary mb-4"
             >
-              Hoa hồng
+              Thời điểm
             </motion.span>
             <motion.h2
-              id="commission-table-heading"
+              id="why-now-heading"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="text-3xl md:text-4xl font-black text-neutral-900 mb-4"
             >
-              Bảng hoa hồng đại lý
+              Tại sao ngay bây giờ?
             </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
@@ -54,61 +91,43 @@ export default function AgentSection() {
               transition={{ delay: 0.2 }}
               className="text-neutral-500 text-lg max-w-xl mx-auto"
             >
-              Minh bạch, rõ ràng — bạn biết chính xác mình nhận được bao nhiêu từ mỗi sân giới thiệu.
+              Đây là thời điểm lý tưởng để bắt đầu. Bốn lý do bạn không nên chờ thêm.
             </motion.p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.4 }}
-            className="max-w-2xl mx-auto"
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            data-testid="why-now-bullets"
           >
-            <div className="overflow-hidden rounded-3xl border border-neutral-200 shadow-lg bg-white">
-              {/* Table header */}
-              <div className="grid grid-cols-2 bg-primary px-8 py-5">
-                <span className="text-sm font-black uppercase tracking-wider text-white/80">
-                  Hoạt động
-                </span>
-                <span className="text-sm font-black uppercase tracking-wider text-white/80 text-right">
-                  Hoa hồng
-                </span>
-              </div>
-
-              {/* Table body */}
-              {COMMISSION_ROWS.map((row, i) => (
+            {URGENCY_BULLETS.map((bullet, i) => (
+              <motion.div
+                key={bullet.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.4 }}
+                whileHover={{ y: -6 }}
+                className={`flex gap-6 p-8 rounded-3xl border-2 ${bullet.accentColor} bg-neutral-50 hover:shadow-lg transition-all group`}
+                data-testid={`why-now-bullet-${i}`}
+              >
                 <div
-                  key={i}
-                  data-testid={`commission-row-${i}`}
-                  className="grid grid-cols-2 items-center px-8 py-6 border-b border-neutral-100 last:border-b-0 hover:bg-primary-light/30 transition-colors"
+                  className={`shrink-0 w-14 h-14 ${bullet.iconBg} rounded-2xl flex items-center justify-center ${bullet.iconColor} group-hover:scale-110 transition-transform`}
+                  aria-hidden="true"
                 >
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2
-                      size={18}
-                      className="shrink-0 text-primary fill-primary/10"
-                      aria-hidden="true"
-                    />
-                    <span className="text-neutral-700 font-medium leading-snug text-sm md:text-base">
-                      {row.activity}
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-xl md:text-2xl font-black text-primary">
-                      {row.amount}
-                    </span>
-                  </div>
+                  {bullet.icon}
                 </div>
-              ))}
 
-              {/* Footer note */}
-              <div className="px-8 py-5 bg-neutral-50 border-t border-neutral-100">
-                <p className="text-xs text-neutral-400 font-medium text-center">
-                  Hoa hồng được thanh toán cuối mỗi tháng sau khi xác nhận sân hoạt động đủ 30 ngày.
-                </p>
-              </div>
-            </div>
-          </motion.div>
+                <div>
+                  <h3 className="text-xl font-black text-neutral-900 mb-3">
+                    {bullet.title}
+                  </h3>
+                  <p className="text-neutral-500 leading-relaxed text-sm">
+                    {bullet.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </>
