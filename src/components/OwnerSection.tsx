@@ -6,7 +6,8 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { motion } from 'motion/react';
 import { PhoneOff, Hourglass, TrendingDown, CheckCircle2 } from 'lucide-react';
-import LeadForm from './LeadForm';
+import LeadForm, { LeadFormData } from './LeadForm';
+import { submitLead } from '../lib/submitLead';
 
 export default function OwnerSection() {
   const avatars = [
@@ -15,33 +16,9 @@ export default function OwnerSection() {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAGix6TXOS_EkhOfiOn3ZFz7kbKUQ29l3pTZbdLtOW3h9JAGR5hgtpBWbIh5uOt2-vbecIYHTdS_tFiEfpGc2E1Rac2nC54Idpf2vo8X2dIb6znuQzU92ri9R4dQ5i0dyz0FQ9j05EY27c8vjGbcRFISvaM1DvfI2T3AvHgNu_1H-ioXCEDryB5kgz34Ore6MxHoyqixLdN2gyPf6bE9Iu9ea5-Q2e-o6imvpGKCO2RaFCWm2rCyIKHbG9JwGy3lGe0oAXDwxjT2nyd"
   ];
 
-  const [phone, setPhone] = useState('');
-  const [phoneError, setPhoneError] = useState('');
-
-  function handlePhoneChange(e: ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    setPhone(value);
-    if (value.length === 0) {
-      setPhoneError('');
-    } else if (!isValidVietnamesePhone(value)) {
-      setPhoneError('Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số bắt đầu bằng 0.');
-    } else {
-      setPhoneError('');
-    }
-  }
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (phone.length === 0) {
-      setPhoneError('Vui lòng nhập số điện thoại.');
-      return;
-    }
-    if (!isValidVietnamesePhone(phone)) {
-      setPhoneError('Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số bắt đầu bằng 0.');
-      return;
-    }
-    // TODO: submit form
-  }
+  const handleLeadSubmit = async (data: LeadFormData): Promise<void> => {
+    await submitLead(data);
+  };
 
   return (
     <>
@@ -103,7 +80,7 @@ export default function OwnerSection() {
             <h3 className="text-2xl font-black mb-2">Bắt đầu ngay hôm nay</h3>
             <p className="text-neutral-500 text-sm mb-8">Điền thông tin để nhận tư vấn miễn phí trong 24h.</p>
 
-            <LeadForm />
+            <LeadForm onSubmit={handleLeadSubmit} />
           </motion.div>
         </div>
       </section>
