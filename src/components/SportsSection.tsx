@@ -4,195 +4,129 @@
  */
 
 import { motion } from 'motion/react';
-import { Search } from 'lucide-react';
-import SportCard from './SportCard';
+import SportCard, { type SportCardProps } from './SportCard';
 
 /**
  * Sport data matching `sport_types` values in the SportBuddies DB.
- * All 5 supported sports with their display names and taglines.
+ *
+ * grava-8a6d.4.7: Responsive grid — 3 columns desktop, 2 columns tablet,
+ * 1 column mobile. Grid classes: grid-cols-1 md:grid-cols-2 lg:grid-cols-3
  */
-const sports = [
+const SPORTS: SportCardProps[] = [
   {
+    sportKey: 'bong-da',
     name: 'Bóng đá',
     tagline: '5vs5, 7vs7 · Sân cỏ nhân tạo',
+    description:
+      'Môn thể thao vua với hàng triệu người chơi tại Việt Nam. Tìm sân bóng đá 5 người, 7 người cỏ nhân tạo và đối tác dễ dàng qua SportBuddies.',
+    details: [
+      { label: 'Hình thức', value: '5vs5, 7vs7' },
+      { label: 'Loại sân', value: 'Cỏ nhân tạo' },
+      { label: 'Thời gian', value: '60 – 90 phút' },
+      { label: 'Phong cách', value: 'Phong trào' },
+    ],
+    icon: '⚽',
+    accentClass: 'bg-success',
     iconBgClass: 'bg-success-bg',
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7 text-success"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 2a10 10 0 0 0-6.2 17.9L12 12l6.2 7.9A10 10 0 0 0 12 2z" />
-        <path d="M12 12 5.8 19.9M12 12l6.2 7.9" />
-        <path d="M4.3 7h15.4M12 2v4" />
-      </svg>
-    ),
   },
   {
+    sportKey: 'cau-long',
     name: 'Cầu lông',
     tagline: 'Sân trong nhà · Tiêu chuẩn thi đấu',
+    description:
+      'Môn thể thao trong nhà phổ biến nhất Việt Nam. Sân đạt tiêu chuẩn thi đấu quốc tế, ánh sáng chuẩn BWF, mặt sàn chuyên dụng. Tìm sân cầu lông gần bạn ngay.',
+    details: [
+      { label: 'Loại sân', value: 'Trong nhà' },
+      { label: 'Tiêu chuẩn', value: 'Thi đấu' },
+      { label: 'Số người', value: '1v1 – 2v2' },
+      { label: 'Hình thức', value: 'Đơn / Đôi' },
+    ],
+    icon: '🏸',
+    accentClass: 'bg-warning',
     iconBgClass: 'bg-warning-bg',
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7 text-warning"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="8" cy="16" r="3" />
-        <line x1="10.5" y1="13.5" x2="20" y2="4" />
-        <path d="M20 4l-3 1 1-3z" />
-        <path d="M15 5l-2 3M17 8l-3 1" />
-      </svg>
-    ),
   },
   {
+    sportKey: 'pickleball',
     name: 'Pickleball',
-    tagline: 'Môn mới tại Việt Nam · Dễ học, dễ chơi',
+    tagline: 'Xu hướng số 1 TPHCM',
+    description:
+      'Hiện tượng thể thao đang gây sốt toàn cầu. Dễ tiếp cận với người mới, đủ thách thức cho người chơi lâu năm. Cộng đồng Pickleball TPHCM đang bùng nổ.',
+    details: [
+      { label: 'Số người', value: '2v2' },
+      { label: 'Loại sân', value: 'Ngoài trời / Nhà' },
+      { label: 'Thời gian', value: '30 – 60 phút' },
+      { label: 'Hình thức', value: 'Đôi nam nữ' },
+    ],
+    icon: '🏓',
+    accentClass: 'bg-primary',
     iconBgClass: 'bg-primary-light',
-    badge: 'Đang hot',
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7 text-primary"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="12" cy="12" r="9" />
-        <line x1="12" y1="3" x2="12" y2="7" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-        <line x1="3" y1="12" x2="7" y2="12" />
-        <line x1="17" y1="12" x2="21" y2="12" />
-      </svg>
-    ),
-  },
-  {
-    name: 'Tennis',
-    tagline: 'Sân đơn và đôi · Trong nhà và ngoài trời',
-    iconBgClass: 'bg-tennis-bg',
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7 text-secondary"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <path d="M18 12c0-2.76-2.24-5-5-5" />
-        <path d="M6 12c0 2.76 2.24 5 5 5" />
-        <path d="M12 2c-1.38 2.5-1.38 7.5 0 10s1.38 7.5 0 10" />
-      </svg>
-    ),
-  },
-  {
-    name: 'Đa năng',
-    tagline: 'Sân linh hoạt · Nhiều môn trên cùng một sân',
-    iconBgClass: 'bg-multisport-bg',
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        className="w-7 h-7 text-blue-500"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <rect x="3" y="3" width="7" height="7" rx="1" />
-        <rect x="14" y="3" width="7" height="7" rx="1" />
-        <rect x="3" y="14" width="7" height="7" rx="1" />
-        <rect x="14" y="14" width="7" height="7" rx="1" />
-      </svg>
-    ),
   },
 ];
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-};
 
 /**
  * SportsSection — MKT-004 "Sports Section".
  *
- * Displays a heading + responsive 5-card grid of sport types supported by
- * the SportBuddies platform. The Tennis card tagline is
- * "Sân đơn và đôi · Trong nhà và ngoài trời".
+ * Displays a heading + responsive card grid of sport types supported by
+ * the SportBuddies platform.
+ *
+ * Responsive grid spec (grava-8a6d.4.7):
+ *   - Mobile:  1 column  (grid-cols-1)
+ *   - Tablet:  2 columns (md:grid-cols-2)
+ *   - Desktop: 3 columns (lg:grid-cols-3)
  */
 export default function SportsSection() {
   return (
-    <section className="py-20 bg-background" aria-labelledby="sports-section-heading">
+    <section className="py-20 bg-white" aria-labelledby="sports-section-heading">
       <div className="max-w-[1200px] mx-auto px-6">
-        {/* Section heading */}
+        {/* Section header */}
         <div className="text-center mb-14">
-          <h2 id="sports-section-heading" className="text-3xl font-black mb-3">
-            Các môn thể thao được hỗ trợ
-          </h2>
-          <p className="text-neutral-600 max-w-xl mx-auto">
-            Từ pickleball đang bùng nổ đến bóng đá truyền thống — SportBuddies có sân cho bạn.
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 bg-primary-light text-primary px-4 py-2 rounded-full mb-5 font-semibold text-sm border border-primary/10"
+          >
+            Môn thể thao hỗ trợ
+          </motion.div>
+
+          <motion.h2
+            id="sports-section-heading"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
+            className="text-3xl md:text-4xl font-black mb-4"
+          >
+            Môn thể thao bạn yêu thích
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-neutral-600 max-w-xl mx-auto"
+          >
+            SportBuddies hỗ trợ đặt sân và tìm đối tác cho các môn thể thao phổ biến nhất tại TPHCM.
+          </motion.p>
         </div>
 
-        {/* 5-card responsive grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        {/* Responsive grid: 1 col mobile · 2 col tablet · 3 col desktop */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           data-testid="sports-grid"
         >
-          {sports.map((sport) => (
-            <motion.div key={sport.name} variants={cardVariants}>
-              <SportCard
-                name={sport.name}
-                tagline={sport.tagline}
-                iconBgClass={sport.iconBgClass}
-                badge={sport.badge}
-                icon={sport.icon}
-              />
+          {SPORTS.map((sport, index) => (
+            <motion.div
+              key={sport.sportKey}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.07 }}
+            >
+              <SportCard {...sport} />
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <button
-            type="button"
-            className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 h-14 rounded-full hover:bg-primary-container transition-all shadow-lg active:scale-95"
-          >
-            <Search size={20} aria-hidden="true" />
-            Mở app ngay
-          </button>
         </div>
       </div>
     </section>
