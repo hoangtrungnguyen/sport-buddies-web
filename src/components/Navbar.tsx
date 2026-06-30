@@ -17,9 +17,9 @@ export default function Navbar({ currentSection, setSection }: NavbarProps) {
 
   const navLinks = [
     { name: 'Tìm sân', id: 'home' },
+    { name: 'Lập hội', id: 'create-group' },
     { name: 'Chủ sân?', id: 'owner' },
-    { name: 'Đại lý', id: 'agent' },
-    { name: 'Về chúng tôi', id: 'about' },
+    { name: 'Bảng giá', id: 'pricing' },
   ];
 
   return (
@@ -56,13 +56,6 @@ export default function Navbar({ currentSection, setSection }: NavbarProps) {
         </nav>
 
         <div className="flex items-center gap-4">
-          <button className="hidden md:block font-semibold text-neutral-600 hover:text-primary transition-colors">
-            Đăng nhập
-          </button>
-          <button className="bg-primary text-white font-semibold px-6 py-2.5 rounded-full hover:bg-primary-container transition-all active:scale-95 shadow-sm">
-            Đăng ký
-          </button>
-          
           <button 
             className="md:hidden text-neutral-600"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -95,10 +88,6 @@ export default function Navbar({ currentSection, setSection }: NavbarProps) {
               {link.name}
             </button>
           ))}
-          <hr className="border-neutral-100" />
-          <button className="font-semibold text-neutral-600 px-4 py-2 text-left">
-            Đăng nhập
-          </button>
         </motion.div>
       )}
     </header>

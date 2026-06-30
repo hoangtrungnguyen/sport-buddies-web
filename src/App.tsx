@@ -9,19 +9,24 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomeSection from './components/HomeSection';
 import OwnerSection from './components/OwnerSection';
-import AppLandingSection from './components/AppLandingSection';
-import AgentSection from './components/AgentSection';
+import PricingSection from './components/PricingSection';
+import DashboardSection from './components/DashboardSection';
+import CreateGroupSection from './components/CreateGroupSection';
 
 const pathToSection: Record<string, string> = {
   '/': 'home',
   '/cho-chu-san': 'owner',
-  '/ve-chung-toi': 'about',
+  '/bang-gia': 'pricing',
+  '/dashboard': 'dashboard',
+  '/create-group': 'create-group',
 };
 
 const sectionToPath: Record<string, string> = {
   'home': '/',
   'owner': '/cho-chu-san',
-  'about': '/ve-chung-toi',
+  'pricing': '/bang-gia',
+  'dashboard': '/dashboard',
+  'create-group': '/create-group',
 };
 
 export default function App() {
@@ -40,6 +45,19 @@ export default function App() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Update document title
+    if (section === 'pricing') {
+      document.title = 'Bảng giá dành cho chủ sân | SportBuddies';
+    } else if (section === 'owner') {
+      document.title = 'Dành cho chủ sân | SportBuddies';
+    } else if (section === 'dashboard') {
+      document.title = 'Dashboard Chủ Sân | SportBuddies';
+    } else if (section === 'create-group') {
+      document.title = 'Lập hội & Kết nối thể thao | SportBuddies';
+    } else {
+      document.title = 'SportBuddies - Đặt sân thể thao tại TP.HCM';
+    }
   }, [section]);
 
   const renderSection = () => {
@@ -48,10 +66,12 @@ export default function App() {
         return <HomeSection />;
       case 'owner':
         return <OwnerSection />;
-      case 'about':
-        return <AppLandingSection />;
-      case 'agent':
-        return <AgentSection />;
+      case 'pricing':
+        return <PricingSection onNavigate={navigate} />;
+      case 'dashboard':
+        return <DashboardSection />;
+      case 'create-group':
+        return <CreateGroupSection />;
       default:
         return <HomeSection />;
     }

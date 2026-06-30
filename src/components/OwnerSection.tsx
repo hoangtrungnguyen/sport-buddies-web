@@ -146,7 +146,7 @@ export default function OwnerSection() {
       </section>
 
       {/* Why Choose SpB? */}
-      <section className="py-24 bg-white">
+      <section data-testid="benefits-section" className="py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="text-center mb-16">
             <motion.div
@@ -165,7 +165,7 @@ export default function OwnerSection() {
               transition={{ delay: 0.1 }}
               className="text-3xl md:text-4xl font-black mb-4"
             >
-              Tại sao chọn <span className="text-primary">SpB</span>?
+              SportBuddies giúp bạn
             </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
@@ -339,10 +339,10 @@ export default function OwnerSection() {
               whileHover={{ y: -5 }}
               className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm group transition-all"
             >
-              <div className="w-14 h-14 bg-warning-bg rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div data-testid="benefit-icon-calendar" className="w-14 h-14 bg-warning-bg rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <CalendarDays className="text-warning" />
               </div>
-              <h3 className="text-xl font-bold mb-4">Lịch sân 7 ngày</h3>
+              <h3 className="text-xl font-bold mb-4">Quản lý lịch sân trực quan theo tuần</h3>
               <p className="text-neutral-500 leading-relaxed text-sm">Xem toàn bộ slot trong tuần, khoá khung giờ bận và tạo lịch cố định hàng tuần — quản lý sân chủ động từ một màn hình.</p>
             </motion.div>
 

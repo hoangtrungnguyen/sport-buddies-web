@@ -6,6 +6,8 @@
 import { motion } from 'motion/react';
 import { Smartphone, PlayCircle, CheckCircle, Map as MapIcon, Calendar, Wallet } from 'lucide-react';
 
+import MaterialMap from './MaterialMap';
+
 export default function AppLandingSection() {
   return (
     <>
@@ -57,34 +59,14 @@ export default function AppLandingSection() {
               </div>
             </div>
 
-            <div className="relative flex justify-center lg:justify-end">
+            <div className="relative flex justify-center lg:justify-end w-full">
               <motion.div 
-                initial={{ rotate: 10, y: 40, opacity: 0 }}
-                animate={{ rotate: 5, y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative w-full max-w-[340px] aspect-[1/2] rounded-[3rem] bg-neutral-900 shadow-2xl border-[10px] border-neutral-900 overflow-hidden"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="w-full max-w-[500px] lg:max-w-none"
               >
-                <img 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyeXtRwLh9lGMbKu6WA23w-HELrKoLhwpXSiZyEVNwXkkvRSF934fNsHZr6VneI1V6dPwwnv_AtCFmnw7xIqqbb8hXHQkgFRjUX4gW_e51LXr6YQmtP6fGdSelgnMG098kCCgeyTR1FwNUh9u9mduCXUG2FvxdCWhhAkfEGjvEro3iS6gZPLmkPWia_vVgjFfF0exwKfmvDz8Cw53Jt4rM57aOLzAVg4pzhPOv77NbN0Oe-cRstUDPc8iEX5xfMT0o4aJ_7mA3ucqp" 
-                  alt="App UI" 
-                  className="w-full h-full object-cover"
-                />
-                
-                {/* Float Success Card */}
-                <motion.div 
-                  initial={{ x: 100, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 1, duration: 0.5 }}
-                  className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[90%] bg-white/95 backdrop-blur-xl rounded-2xl p-4 shadow-xl flex items-center gap-4 border border-white/20"
-                >
-                  <div className="w-12 h-12 rounded-full bg-success-bg flex items-center justify-center text-success">
-                    <CheckCircle size={24} fill="currentColor" className="text-white" />
-                  </div>
-                  <div>
-                    <p className="font-black text-neutral-900 text-sm">Đặt sân thành công!</p>
-                    <p className="text-xs text-neutral-500 font-medium tracking-tight">Sân bóng Mini 5 · 18:00 - 19:00</p>
-                  </div>
-                </motion.div>
+                <MaterialMap />
               </motion.div>
               
               {/* Blurred Glow Background */}

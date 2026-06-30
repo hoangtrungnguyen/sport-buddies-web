@@ -1,0 +1,12 @@
+# SportBuddies
+> Nền tảng đặt sân thể thao trực tuyến tại TP.HCM cho các bộ môn bóng đá, cầu lông, pickleball và tennis.
+
+## Các trang chính / Main Pages
+- [Đặt sân / Home](https://sportbuddies.vn/): Trang chủ tìm kiếm và đặt các sân thể thao tại TP.HCM.
+- [Dành cho chủ sân / Partner Portal](https://sportbuddies.vn/cho-chu-san): Trang đăng ký đối tác, giới thiệu giải pháp quản lý lịch sân trực quan theo tuần và tối ưu doanh thu cho chủ sân.
+- [Về chúng tôi / About us](https://sportbuddies.vn/ve-chung-toi): Giới thiệu ứng dụng di động SportBuddies, tính năng và hướng dẫn cài đặt PWA.
+
+## Tích hợp & Tiếp thị liên kết / Integrations & Referrals
+- [Gửi thông tin liên hệ / Lead API](https://sportbuddies.vn/api/leads): Endpoint POST để gửi thông tin liên hệ của chủ sân (bao gồm họ tên, số điện thoại, tên sân).
+- [Mã giới thiệu đại lý / Agent Referrals](https://sportbuddies.vn/?agent=CODE): Hỗ trợ ghi nhận mã đại lý qua tham số URL `?agent=CODE` để tự động đối chiếu và tính hoa hồng giới thiệu khi chủ sân đăng ký.
+- [Tham số UTM / Campaign Tracking](https://sportbuddies.vn/?utm_source=source): Tự động ghi nhận các tham số UTM (`utm_source`, `utm_medium`, `utm_campaign`) từ URL để theo dõi hiệu quả chiến dịch tiếp thị.

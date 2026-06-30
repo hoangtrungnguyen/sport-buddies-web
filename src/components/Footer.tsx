@@ -123,7 +123,7 @@ export default function Footer() {
           <h4 className="font-bold text-neutral-900 mb-4 uppercase tracking-wider text-xs">Dành cho</h4>
           <ul className="space-y-3 text-sm">
             <li><a href="/cho-chu-san" className="text-neutral-500 hover:text-primary transition-colors">Chủ sân</a></li>
-            <li><a href="/dai-ly" className="text-neutral-500 hover:text-primary transition-colors">Đại lý / CTV</a></li>
+            <li><a href="/create-group" className="text-neutral-500 hover:text-primary transition-colors">Lập hội nhóm</a></li>
           </ul>
         </div>
       </div>
